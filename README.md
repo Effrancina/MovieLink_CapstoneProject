@@ -6,5 +6,5 @@ A 2 week project helping friends in diifferent countries find movies they are bo
 ## Creators:
 -
 -
--
+- Cordu Gunst
 - RomainLando
