@@ -17,6 +17,8 @@ public class Region {
     @Column(name = "region_name")
     private String regionName;
 
+    @Column(name = "platform")
+    private String platform;
 
     @ManyToMany
     @JsonIgnoreProperties({"regions"})
@@ -40,9 +42,18 @@ public class Region {
     public Region() {
     }
 
-    public Region(String regionName) {
+    public Region(String regionName, String platform) {
         this.regionName = regionName;
+        this.platform = platform;
         this.movies = new ArrayList<>();
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
     }
 
     public Long getId() {
