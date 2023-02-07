@@ -28,7 +28,20 @@ export default function App() {
       <Text style={styles.title}>MovieLink</Text>
       <StatusBar style="auto" />
       <View>
-        <Text> {movieItems}</Text>
+        <FlatList
+            data={movies}
+            renderItem={(itemData) => {
+              console.log(itemData)
+              return (
+                <View>
+                  <Text>{itemData.item.title}</Text>
+                </View>
+              );
+            }}
+            alwaysBounceVertical={false}
+          >
+            )
+          </FlatList>
       </View>
     </View>
    
