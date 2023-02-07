@@ -29,7 +29,7 @@ class MovieprojectApplicationTests {
 
 	@Test
 	public void addMovie(){
-		Region region = new Region("UK");
+		Region region = new Region("GB", "Netflix");
 		Movie movie = new Movie("All Quiet on the Western Front");
 		region.addMovie(movie);
 		movieRepository.save(movie);
