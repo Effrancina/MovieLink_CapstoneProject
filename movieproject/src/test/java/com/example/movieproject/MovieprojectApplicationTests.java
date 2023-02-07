@@ -15,20 +15,17 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 @SpringBootTest
 class MovieprojectApplicationTests {
-
 	@Autowired
 	MovieRepository movieRepository;
-
 	@Autowired
 	RegionRepository regionRepository;
-	
-
 	@Test
 	void contextLoads() {
 	}
 
 	@Test
 	public void addMovie(){
+
 		Region region = new Region("GB", "Netflix");
 		Movie movie = new Movie("All Quiet on the Western Front");
 		region.addMovie(movie);
