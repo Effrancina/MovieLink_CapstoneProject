@@ -25,13 +25,11 @@ class MovieprojectApplicationTests {
 
 	@Test
 	public void addMovie(){
-		Region region = new Region("UK");
-		Movie movie1 = new Movie("All Quiet on the Western Front");
-		region.addMovie(movie1);
-		Movie movie2 = new Movie("The Grinch");
-		region.addMovie(movie2);
-		movieRepository.save(movie1);
-		movieRepository.save(movie2);
+
+		Region region = new Region("GB", "Netflix");
+		Movie movie = new Movie("All Quiet on the Western Front");
+		region.addMovie(movie);
+		movieRepository.save(movie);
 		regionRepository.save(region);
 	}
 
