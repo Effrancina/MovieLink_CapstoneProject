@@ -24,6 +24,7 @@ public class MovieController {
         return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
     }
 
+    //post method for multiple movie objects
     @PostMapping(value="/movies")
     public ResponseEntity<List<Movie>> postMovies(@RequestBody ArrayList<Movie> movies){
         for (Movie movie : movies){
