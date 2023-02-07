@@ -24,10 +24,11 @@ public class MovieController {
         return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
     }
 
+
     @PostMapping(value="/movies")
     public ResponseEntity<List<Movie>> postMovies(@RequestBody ArrayList<Movie> movies){
         for (Movie movie : movies){
-        movieRepository.save(movie);
+            movieRepository.save(movie);
         }
         return new ResponseEntity<>(movies, HttpStatus.CREATED);
     }
