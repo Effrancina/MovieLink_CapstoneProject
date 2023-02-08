@@ -11,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -33,6 +38,11 @@ class MovieprojectApplicationTests {
 		regionRepository.save(region);
 	}
 
-
+	@Test
+	public void canFindAllMoviesByRegion(){
+		List<Movie> found = movieRepository.findAllByRegionsId(1L);
+		assertTrue(found.size()>0);
+		assertEquals("All Quiet on the Western Front", found.get(0).getTitle());
+	}
 
 }

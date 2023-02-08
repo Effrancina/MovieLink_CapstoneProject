@@ -19,6 +19,7 @@ public class RegionController {
 
     @Autowired
     RegionRepository regionRepository;
+
     @Autowired
     MovieRepository movieRepository;
 
