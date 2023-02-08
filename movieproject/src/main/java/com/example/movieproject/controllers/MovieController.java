@@ -28,13 +28,7 @@ public class MovieController {
         }
         return new ResponseEntity<>(movies, HttpStatus.CREATED);
     }
-//
-//    @GetMapping(value="/movies/regions")
-//    public ResponseEntity<List<Movie>> findMoviesByRegionsRegionName(
-//            @RequestParam(name= "named") String regionsName){
-//        return new ResponseEntity<>(movieRepository.findMoviesByRegionsRegionName(regionsName),HttpStatus.OK);
-//
-//    }
+
 }
 
 
