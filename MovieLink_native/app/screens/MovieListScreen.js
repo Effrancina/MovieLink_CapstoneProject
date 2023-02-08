@@ -6,9 +6,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import  {useEffect,useState} from 'react'
 import {useNavigation} from "@react-navigation/native";
 import SafeViewAndroid from '../components/SafeViewAndroid';
+import { getAllMovies } from '../services/MovieServices';
 
 
- const HomeScreen = () => {
+ const MovieListScreen = () => {
     const[movies,setMovies] = useState([])
     const navigation = useNavigation()
 
@@ -19,17 +20,13 @@ import SafeViewAndroid from '../components/SafeViewAndroid';
     });
 
     useEffect( () => {
-    fetch("http://192.168.100.133:8080/movies")
-        .then (res => res.json())
-        // .then(moviesData => setMovies(moviesData))
+        getAllMovies()
         .then(moviesData => setMovies(moviesData))
-        // .then(moviesData => setMovies(moviesData[0]))
         .catch(err => console.error(err));
-    
     }, [])
 
     const movieItems = movies.map( (movie) => {
-    console.log(movie.title)
+
     return <Text key={movie.id}>{movie.title}</Text>
     })
 
@@ -42,7 +39,7 @@ import SafeViewAndroid from '../components/SafeViewAndroid';
         <FlatList
             data={movies}
             renderItem={(itemData) => {
-                console.log(itemData)
+                
                 return (
                     <View>
                     <Text>{itemData.item.title}</Text>
@@ -73,4 +70,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default HomeScreen;
+export default MovieListScreen;

@@ -11,7 +11,8 @@ import {
 import { TailwindProvider } from "tailwindcss-react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import HomeScreen from "./app/screens/HomeScreen";
+import MovieListScreen from "./app/screens/MovieListScreen";
+
 
 // import DetailsScreen from "./screens/DetailsScreen";
 // import ImportantStuff from "./screens/ImportantStuff";
@@ -22,7 +23,7 @@ export default function App() {
     <NavigationContainer>
       <TailwindProvider>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Movie List" component={MovieListScreen} />
           {/* <Stack.Screen name="Details" component={DetailsScreen} />
           <Stack.Screen name="Important_Stuff" component={ImportantStuff} /> */}
         </Stack.Navigator>
