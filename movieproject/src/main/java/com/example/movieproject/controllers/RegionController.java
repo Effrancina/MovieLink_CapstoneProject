@@ -19,6 +19,7 @@ public class RegionController {
 
     @Autowired
     RegionRepository regionRepository;
+    @Autowired
     MovieRepository movieRepository;
 
     @GetMapping(value="/regions")
@@ -27,13 +28,8 @@ public class RegionController {
     }
 
     @GetMapping(value="/regions/{id}")
-    public ResponseEntity getRegion(@PathVariable Long id){
-        return new ResponseEntity<>(regionRepository.findById(id), HttpStatus.OK);
-    }
-
-    @GetMapping(value="/regions/{id}")
     public ResponseEntity<List<Movie>> getMoviesForRegion(@PathVariable Long id){
-        return new ResponseEntity<>(movieRepository.findAllByRegions(id), HttpStatus.OK);
+        return new ResponseEntity<>(movieRepository.findAllByRegionsId(id), HttpStatus.OK);
     }
 
 }
