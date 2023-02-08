@@ -5,10 +5,7 @@ import com.example.movieproject.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +21,6 @@ public class MovieController {
         return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
     }
 
-
     @PostMapping(value="/movies")
     public ResponseEntity<List<Movie>> postMovies(@RequestBody ArrayList<Movie> movies){
         for (Movie movie : movies){
@@ -32,4 +28,30 @@ public class MovieController {
         }
         return new ResponseEntity<>(movies, HttpStatus.CREATED);
     }
+//
+//    @GetMapping(value="/movies/regions")
+//    public ResponseEntity<List<Movie>> findMoviesByRegionsRegionName(
+//            @RequestParam(name= "named") String regionsName){
+//        return new ResponseEntity<>(movieRepository.findMoviesByRegionsRegionName(regionsName),HttpStatus.OK);
+//
+//    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
