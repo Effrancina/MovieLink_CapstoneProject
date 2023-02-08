@@ -1,64 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import  {useEffect,useState} from 'react'
+import { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+  FlatList,
+} from "react-native";
+import { TailwindProvider } from "tailwindcss-react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import HomeScreen from "./app/screens/HomeScreen";
+
+// import DetailsScreen from "./screens/DetailsScreen";
+// import ImportantStuff from "./screens/ImportantStuff";
 
 export default function App() {
-  const[movies,setMovies] = useState([])
-
-  useEffect( () => {
-    fetch("http://192.168.100.127:8080/movies")
-      .then (res => res.json())
-      // .then(moviesData => setMovies(moviesData))
-      .then(moviesData => setMovies(moviesData))
-      // .then(moviesData => setMovies(moviesData[0]))
-      .catch(err => console.error(err));
-  
-  }, [])
-
-  const movieItems = movies.map( (movie) => {
-    console.log(movie.title)
-    return <Text key={movie.id}>{movie.title}</Text>
-  })
-
+  const Stack = createNativeStackNavigator();
   return (
-    <View style={styles.container}>
-      <MaterialCommunityIcons name="movie-roll" size={40} color="black"/>
-      <Text style={styles.title}>MovieLink</Text>
-      <StatusBar style="auto" />
-      <View>
-        <FlatList
-            data={movies}
-            renderItem={(itemData) => {
-              console.log(itemData)
-              return (
-                <View>
-                  <Text>{itemData.item.title}</Text>
-                </View>
-              );
-            }}
-            alwaysBounceVertical={false}
-          >
-            )
-          </FlatList>
-      </View>
-    </View>
-   
+    <NavigationContainer>
+      <TailwindProvider>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          {/* <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="Important_Stuff" component={ImportantStuff} /> */}
+        </Stack.Navigator>
+      </TailwindProvider>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
- 
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  }
-
-});
