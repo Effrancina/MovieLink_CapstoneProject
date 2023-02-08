@@ -1,13 +1,22 @@
 import React, { useLayoutEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+// import Icon from 'react-native-vector-icons/FontAwesome5';
 import  {useEffect,useState} from 'react'
+import {useNavigation} from "@react-navigation/native";
+import SafeViewAndroid from '../components/SafeViewAndroid';
+
 
  const HomeScreen = () => {
     const[movies,setMovies] = useState([])
+    const navigation = useNavigation()
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerShown: false,
+        });
+    });
 
     useEffect( () => {
     fetch("http://192.168.100.133:8080/movies")
@@ -25,7 +34,7 @@ import  {useEffect,useState} from 'react'
     })
 
     return (
-    <View style={styles.container}>
+    <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
         <MaterialCommunityIcons name="movie-roll" size={40} color="black"/>
         <Text style={styles.title}>MovieLink</Text>
         <StatusBar style="auto" />
@@ -35,7 +44,7 @@ import  {useEffect,useState} from 'react'
             renderItem={(itemData) => {
                 console.log(itemData)
                 return (
-                <View>
+                    <View>
                     <Text>{itemData.item.title}</Text>
                 </View>
                 );
@@ -44,18 +53,18 @@ import  {useEffect,useState} from 'react'
             >
             </FlatList>
         </View>
-    </View>
+    </SafeAreaView>
     
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    },
+    // container: {
+    // flex: 1,
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // },
     
     title: {
     fontSize: 20,
