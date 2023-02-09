@@ -12,7 +12,6 @@ const MovieListScreen = ({ route }) => {
   const [movies, setMovies] = useState([]);
   const navigation = useNavigation();
   const id = route.params;
-  console.log(id.id)
   
 
   useLayoutEffect(() => {
@@ -22,11 +21,7 @@ const MovieListScreen = ({ route }) => {
   });
 
   useEffect(() => {
-    // getAllMovies()
-    //   .then((moviesData) => setMovies(moviesData))
-    //   .catch((err) => console.error(err));
-
-      fetch("http://192.168.100.127:8080/regions/"+id.id)
+      fetch("http://192.168.100.133:8080/movies?region="+id.id)
         .then (res => res.json())
         .then((moviesData) => setMovies(moviesData))
         .catch((err) => console.error(err));

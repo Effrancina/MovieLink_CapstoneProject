@@ -17,7 +17,11 @@ public class MovieController {
     MovieRepository movieRepository;
 
     @GetMapping(value="/movies")
-    public ResponseEntity<List<Movie>> getAllMovies(){
+    public ResponseEntity<List<Movie>> getAllMovies(
+            @RequestParam(name ="region", required = false) Long id) {
+        if(id != null){
+            return new ResponseEntity<>(movieRepository.findAllByRegionsId(id), HttpStatus.OK);
+        }
         return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
     }
 
