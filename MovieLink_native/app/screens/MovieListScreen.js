@@ -9,7 +9,7 @@ import SafeViewAndroid from '../components/SafeViewAndroid';
 import { getAllMovies } from '../services/MovieServices';
 
 
- const MovieListScreen = () => {
+ const MovieListScreen = (props) => {
     const[movies,setMovies] = useState([])
     const navigation = useNavigation()
 
@@ -23,6 +23,7 @@ import { getAllMovies } from '../services/MovieServices';
         getAllMovies()
         .then(moviesData => setMovies(moviesData))
         .catch(err => console.error(err));
+        console.log(props)
     }, [])
 
     const movieItems = movies.map( (movie) => {

@@ -24,8 +24,8 @@ export default function App() {
     <NavigationContainer>
       <TailwindProvider>
         <Stack.Navigator>
-          {/* <Stack.Screen name="Movie List" component={MovieListScreen} /> */}
           <Stack.Screen name="Region Select Screen" component={RegionSelectScreen} />
+          <Stack.Screen name="Movie List" component={MovieListScreen} />
          
         </Stack.Navigator>
       </TailwindProvider>
