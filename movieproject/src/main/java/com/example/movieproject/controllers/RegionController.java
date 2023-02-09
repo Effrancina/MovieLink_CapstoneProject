@@ -28,9 +28,9 @@ public class RegionController {
         return new ResponseEntity<>(regionRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value="/regions/{id}")
-    public ResponseEntity<List<Movie>> getMoviesForRegion(@PathVariable Long id){
-        return new ResponseEntity<>(movieRepository.findAllByRegionsId(id), HttpStatus.OK);
-    }
+
+//
+//
+
 
 }

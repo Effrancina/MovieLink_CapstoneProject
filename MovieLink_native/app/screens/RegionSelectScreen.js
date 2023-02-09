@@ -43,9 +43,7 @@ const RegionSelectScreen = () => {
             value:region.regionName
         }
     })
-    console.log(newObject);
     setJustRegions(newObject)
-    // console.log(justRegions)
     
   }
 
