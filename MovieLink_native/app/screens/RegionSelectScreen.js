@@ -26,8 +26,12 @@ const RegionSelectScreen = () => {
     getAllRegions()
       .then((regionsData) => setRegions(regionsData))
       .catch((err) => console.error(err));
-      makeObject()
     }, []);
+    
+    useEffect(()=>{
+        
+        makeObject()
+    },[regions])
     
     function makeObject() {
       
@@ -38,7 +42,7 @@ const RegionSelectScreen = () => {
     })
     console.log(newObject);
     setJustRegions(newObject)
-    console.log(justRegions)
+    // console.log(justRegions)
     
   }
 
