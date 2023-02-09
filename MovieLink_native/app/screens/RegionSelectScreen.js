@@ -14,6 +14,7 @@ const RegionSelectScreen = () => {
   const [regions, setRegions] = useState([]);
   const [justRegions, setJustRegions] = useState([]);
   const [selected, setSelected] = useState([]);
+  
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
@@ -26,6 +27,7 @@ const RegionSelectScreen = () => {
     getAllRegions()
       .then((regionsData) => setRegions(regionsData))
       .catch((err) => console.error(err));
+    
     }, []);
     
     useEffect(()=>{
@@ -37,6 +39,7 @@ const RegionSelectScreen = () => {
       
     const newObject = regions.map((region)=>{
         return{
+            key:region.id,
             value:region.regionName
         }
     })
@@ -52,11 +55,11 @@ const RegionSelectScreen = () => {
          <SelectList 
         setSelected={(val) => setSelected(val)} 
         data={justRegions} 
-        save="value"
+        save="key"
         />
         <Button
         title="Get Available Movies"
-        onPress={() => navigation.navigate('Movie List')}
+        onPress={() => navigation.navigate('Movie List',{id:selected})}
         selected = {selected}
       />
     </SafeAreaView>
