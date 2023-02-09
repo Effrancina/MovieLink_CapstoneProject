@@ -14,6 +14,7 @@ const RegionSelectScreen = () => {
   const [regions, setRegions] = useState([]);
   const [justRegions, setJustRegions] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [selected2, setSelected2] = useState([]);
   
   const navigation = useNavigation();
 
@@ -55,9 +56,14 @@ const RegionSelectScreen = () => {
         data={justRegions} 
         save="key"
         />
+         <SelectList 
+        setSelected={(val) => setSelected2(val)} 
+        data={justRegions} 
+        save="key"
+        />
         <Button
         title="Get Available Movies"
-        onPress={() => navigation.navigate('Movie List',{id:selected})}
+        onPress={() => navigation.navigate('Movie List',{id1:selected,id2:selected2})}
         selected = {selected}
       />
     </SafeAreaView>

@@ -9,9 +9,12 @@ import SafeViewAndroid from "../components/SafeViewAndroid";
 import { getAllMovies } from "../services/MovieServices";
 
 const MovieListScreen = ({ route }) => {
-  const [movies, setMovies] = useState([]);
+  const [movies1, setMovies1] = useState([]);
+  const [movies2, setMovies2] = useState([]);
   const navigation = useNavigation();
-  const id = route.params;
+  const {id1,id2} = route.params;
+  const [moviesFound, setMoviesFound] = useState([]);
+
   
 
   useLayoutEffect(() => {
@@ -21,17 +24,30 @@ const MovieListScreen = ({ route }) => {
   });
 
   useEffect(() => {
-      fetch("http://192.168.100.133:8080/movies?region="+id.id)
+      fetch("http://192.168.100.127:8080/movies?region="+id1)
         .then (res => res.json())
-        .then((moviesData) => setMovies(moviesData))
+        .then((moviesData) => setMovies1(moviesData))
         .catch((err) => console.error(err));
-      
-   
+
+      fetch("http://192.168.100.127:8080/movies?region="+id2)
+        .then (res => res.json())
+        .then((moviesData) => setMovies2(moviesData))
+        .catch((err) => console.error(err));
   }, []);
 
-  const movieItems = movies.map((movie) => {
-    return <Text key={movie.id}>{movie.title}</Text>;
-  });
+    
+
+
+    useEffect(()=> {
+        if (movies1.length>0 && movies2.length>0) {
+        const movie1Ids = movies1.map((movie) => {
+            return (movie.id)
+        });
+        const moviesToFind = movies2.filter(movie => movie1Ids.includes(movie.id))
+        setMoviesFound(moviesToFind)
+    }
+    },[movies2, movies1])
+    
 
   return (
     <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
@@ -41,7 +57,7 @@ const MovieListScreen = ({ route }) => {
       
       <View>
         <FlatList
-          data={movies}
+          data={moviesFound}
           renderItem={(itemData) => {
             return (
               <View>
