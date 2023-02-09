@@ -20,11 +20,12 @@ import RegionSelectScreen from "./app/screens/RegionSelectScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+  
   return (
     <NavigationContainer>
       <TailwindProvider>
         <Stack.Navigator>
-          <Stack.Screen name="Region Select Screen" component={RegionSelectScreen} />
+          <Stack.Screen name="Region Select Screen" component={RegionSelectScreen}/>
           <Stack.Screen name="Movie List" component={MovieListScreen} />
          
         </Stack.Navigator>
