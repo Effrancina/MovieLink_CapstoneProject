@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     Image,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -23,7 +23,8 @@ import {
     MagnifyingGlassIcon,
     AdjustmentsVerticalIcon,
 } from "react-native-heroicons/outline";
-import { getAllMovies } from "../services/MovieServices";
+import { getAllMovies, getMoviesRegion1,getMoviesRegion2 } from "../services/MovieServices";
+import Header from "../components/Header";
 
 const MovieListScreen = ({ route }) => {
     const [movies1, setMovies1] = useState([]);
@@ -32,8 +33,6 @@ const MovieListScreen = ({ route }) => {
     const { id1, id2 } = route.params;
     const [moviesFound, setMoviesFound] = useState([]);
 
-
-
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false,
@@ -41,19 +40,9 @@ const MovieListScreen = ({ route }) => {
     });
 
     useEffect(() => {
-        fetch("http://192.168.0.55:8080/movies?region=" + id1)
-            .then(res => res.json())
-            .then((moviesData) => setMovies1(moviesData))
-            .catch((err) => console.error(err));
-
-        fetch("http://192.168.0.55:8080/movies?region=" + id2)
-            .then(res => res.json())
-            .then((moviesData) => setMovies2(moviesData))
-            .catch((err) => console.error(err));
+        getMoviesRegion1(setMovies1,id1)
+        getMoviesRegion2(setMovies2,id2)
     }, []);
-
-
-
 
     useEffect(() => {
         if (movies1.length > 0 && movies2.length > 0) {
@@ -65,24 +54,10 @@ const MovieListScreen = ({ route }) => {
         }
     }, [movies2, movies1])
 
-
-
-
     return (
         <View className="bg-[#19232E] font-bold flex-1">
             <View className="mt-10">
-
-                <View className="flex-row justify-center">
-
-                    <View className="flex-row justify-center">
-
-                        <MaterialCommunityIcons name="movie-roll" size={100} color="white" />
-                    </View>
-                    <Text className="font-bold text-5xl my-9 text-white " >
-                        MovieLink
-                    </Text>
-                </View>
-
+            <Header></Header>
 
                 <StatusBar style="auto" />
 
@@ -90,7 +65,7 @@ const MovieListScreen = ({ route }) => {
                     We found these Movies for you!
                 </Text>
 
-                <View className="pb-100 flex-row-1 pl-4">
+                <View className="pb-100 pl-4">
                     <FlatList
                         contentContainerStyle={{ paddingBottom: 400 }}
 
@@ -98,20 +73,20 @@ const MovieListScreen = ({ route }) => {
                         renderItem={(itemData) => {
 
                             return (
-                                <View className="flex-row">
-                                    <View className="pr-5 pb-5">
+                                <View className="flex-row rounded-xl items-center mb-4 mr-3 bg-[#313d4a]">
+                                    <View className="pr-5 ">
                                         <Image
                                             source={{ uri: "https://images.justwatch.com/poster/8731868/s592/the-lord-of-the-rings-the-fellowship-of-the-ring.webp" }}
                                             className="h-48 w-28"
                                             accessibilityLabel="movie poster">
                                         </Image>
                                     </View>
-                                    <View className="border-2 border-white mb-5">
+                                    <View className="  mb-5 flex-1 mr-2">
                                         <View style={{ flexDirection: "row" }}>
 
-                                            <Text style={{ flex: 1,fontSize:20,color:"white" }}>{itemData.item.title}</Text>
+                                            <Text style={{ flex: 1,fontSize:20,color:"white",textAlign:"center",fontWeight:"bold" }}>{itemData.item.title}</Text>
                                         </View>
-                                        <Text className="text-white">Platform: {itemData.item.regions[0].platform}</Text>
+                                        <Text className="text-white font-bold text-center">Platform: {itemData.item.regions[0].platform}</Text>
                                     </View>
                                 </View>
                             );
