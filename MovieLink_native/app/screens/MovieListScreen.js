@@ -25,6 +25,7 @@ import {
 } from "react-native-heroicons/outline";
 import { getAllMovies, getMoviesRegion1,getMoviesRegion2 } from "../services/MovieServices";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const MovieListScreen = ({ route }) => {
     const [movies1, setMovies1] = useState([]);
@@ -55,8 +56,8 @@ const MovieListScreen = ({ route }) => {
     }, [movies2, movies1])
 
     return (
-        <View className="bg-[#19232E] font-bold flex-1">
-            <View className="mt-10">
+        <View className="bg-[#19232E] font-bold justify-around">
+            <View className="mt-24 ">
             <Header></Header>
 
                 <StatusBar style="auto" />
@@ -92,9 +93,10 @@ const MovieListScreen = ({ route }) => {
                             );
                         }}
                         alwaysBounceVertical={false}
-                    ></FlatList>
+                        ></FlatList>
                 </View>
             </View>
+                        <Footer></Footer>
         </View>
     );
 };
