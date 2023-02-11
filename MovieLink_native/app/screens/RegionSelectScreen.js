@@ -18,7 +18,6 @@ import SafeViewAndroid from "../components/SafeViewAndroid";
 import { getAllRegions } from "../services/RegionServices";
 import { SelectList } from "react-native-dropdown-select-list";
 
-
 const RegionSelectScreen = () => {
   const [regions, setRegions] = useState([]);
   const [justRegions, setJustRegions] = useState([]);
@@ -54,30 +53,36 @@ const RegionSelectScreen = () => {
   }
 
   return (
-    <View className="bg-[#19232E] font-bold flex-1 justify-center item-center ">
+    <View className="bg-[#365678] font-bold flex-1 justify-center item-center ">
       <MaterialCommunityIcons name="movie-roll" size={40} color="black" />
       <Text className="font-bold text-lg my-10 text-white" style={styles.title}>
         MovieLink
       </Text>
-      <StatusBar style="auto" className="text-white"/>
+      <StatusBar style="auto" className="text-white" />
       <Text className="text-lg my-10 text-white font-bold text-center">
         {" "}
         Select Your Country Below
       </Text>
+      <View>
+
       <SelectList
+        boxStyles={{backgroundColor:"red"}}
+        dropdownTextStyles={{color:"white",fontWeight:"bold"}}
         className="text-black text-center"
-        boxStyles={{borderRadius:0, backgroundColor:red}}
         setSelected={(val) => setSelected(val)}
         data={justRegions}
         save="key"
-      />
+        />
+        </View>
+        <View>
+
       <SelectList
         className="text-black text-center"
-        boxStyles={{borderRadius:0, backgroundColor: red}}
         setSelected={(val) => setSelected2(val)}
         data={justRegions}
         save="key"
-      />
+        />
+        </View>
       <TouchableOpacity
         className="rounded-lg bg-[#62DFB7]"
         onPress={() =>
