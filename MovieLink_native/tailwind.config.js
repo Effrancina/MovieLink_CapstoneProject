@@ -13,4 +13,9 @@ module.exports = {
         black: "#19232E", 
         green: "#62DFB7",
       },
+    theme:{
+      fontFamily: {
+        sans: ['"PT Sans"', 'sans-serif']
+      }
+    }
     }
