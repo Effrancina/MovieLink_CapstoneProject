@@ -24,12 +24,12 @@ const MovieListScreen = ({ route }) => {
   });
 
   useEffect(() => {
-      fetch("http://192.168.100.127:8080/movies?region="+id1)
+      fetch("http://192.168.0.54:8080/movies?region="+id1)
         .then (res => res.json())
         .then((moviesData) => setMovies1(moviesData))
         .catch((err) => console.error(err));
 
-      fetch("http://192.168.100.127:8080/movies?region="+id2)
+      fetch("http://192.168.0.54:8080/movies?region="+id2)
         .then (res => res.json())
         .then((moviesData) => setMovies2(moviesData))
         .catch((err) => console.error(err));
