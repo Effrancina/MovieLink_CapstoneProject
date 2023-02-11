@@ -11,8 +11,8 @@ import {
 
 const Footer = () => {
   return (
-    <View className="bg-[#313d4a] flex-0.5 py-5" >
-        <View className="flex-row justify-around items-center">
+    <View className="bg-[#313d4a] flex-0.5 py-5 border-t-4" >
+        <View className="flex-row justify-around items-center ">
 
         <TouchableOpacity>
             <HomeIcon size={40} color="white"></HomeIcon>
