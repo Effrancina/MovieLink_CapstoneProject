@@ -6,17 +6,23 @@ import {
   Text,
   View,
   FlatList,
-  SafeAreaView,
+  ScrollView,
   Button,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import SafeViewAndroid from "../components/SafeViewAndroid";
 import { getAllRegions } from "../services/RegionServices";
 import { SelectList } from "react-native-dropdown-select-list";
+import {
+  UserIcon,
+  ChevronDownIcon,
+  MagnifyingGlassIcon,
+  AdjustmentsVerticalIcon,
+} from "react-native-heroicons/outline";
 
 const RegionSelectScreen = () => {
   const [regions, setRegions] = useState([]);
@@ -53,48 +59,74 @@ const RegionSelectScreen = () => {
   }
 
   return (
-    <View className="bg-[#365678] font-bold flex-1 justify-center item-center ">
-      <MaterialCommunityIcons name="movie-roll" size={40} color="black" />
-      <Text className="font-bold text-lg my-10 text-white" style={styles.title}>
-        MovieLink
-      </Text>
-      <StatusBar style="auto" className="text-white" />
-      <Text className="text-lg my-10 text-white font-bold text-center">
-        {" "}
-        Select Your Country Below
-      </Text>
-      <View>
+    <View className="bg-[#19232E] font-bold flex-1">
+      <ScrollView className="mt-10">
 
-      <SelectList
-        boxStyles={{backgroundColor:"red"}}
-        dropdownTextStyles={{color:"white",fontWeight:"bold"}}
-        className="text-black text-center"
-        setSelected={(val) => setSelected(val)}
-        data={justRegions}
-        save="key"
-        />
-        </View>
-        <View>
+        <View className="flex-row justify-center">
 
-      <SelectList
-        className="text-black text-center"
-        setSelected={(val) => setSelected2(val)}
-        data={justRegions}
-        save="key"
-        />
+          <View className="flex-row justify-center">
+
+            <MaterialCommunityIcons name="movie-roll" size={100} color="white" />
+          </View>
+          <Text className="font-bold text-5xl my-9 text-white " >
+            MovieLink
+          </Text>
         </View>
-      <TouchableOpacity
-        className="rounded-lg bg-[#62DFB7]"
-        onPress={() =>
-          navigation.navigate("Movie List", { id1: selected, id2: selected2 })
-        }
-        selected={selected}
-      >
-        <Text className="text-center text-black text-lg font-bold">
-          Get Available Movies
+
+        <StatusBar style="auto" className="text-white" />
+        <Text className="text-lg my-10 text-white font-bold text-center">
+          Select Your Regions Below
         </Text>
-      </TouchableOpacity>
+
+        <View className="p-3">
+        <SelectList
+            boxStyles={{ backgroundColor: "#B9AEE0" }}
+            dropdownTextStyles={{ color: "black", fontWeight: "bold", fontSize: 16 }}
+            dropdownItemStyles={{ backgroundColor: "#B9AEE0" }}
+            inputStyles={{ fontWeight: "bold" }}
+            className="text-black text-center"
+            setSelected={(val) => setSelected(val)}
+            data={justRegions}
+            save="key"
+          />
+        </View>
+
+        <View className="p-3">
+          <SelectList
+            boxStyles={{ backgroundColor: "#B9AEE0" }}
+            dropdownTextStyles={{ color: "black", fontWeight: "bold", fontSize: 16 }}
+            dropdownItemStyles={{ backgroundColor: "#B9AEE0" }}
+            inputStyles={{ fontWeight: "bold" }}
+            className="text-black text-center"
+            setSelected={(val) => setSelected(val)}
+            data={justRegions}
+            save="key"
+          />
+        </View>
+
+        <View className="flex-row justify-center border-white">
+          <TouchableOpacity
+            className="rounded-lg bg-[#62DFB7] p-3 w-60 "
+            onPress={() =>
+              navigation.navigate("Movie List", { id1: selected, id2: selected2 })
+            }
+            selected={selected}
+          >
+            <Text className="text-center text-black text-lg font-bold">
+              Get Available Movies
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View className="flex-row justify-center mt-10">
+          <Image
+            source={{uri:"https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/Hero.png?w=769"}}
+            className="h-32 w-60 rounded-md"
+            accessibilityLabel="Movie poster">
+          </Image>
+        </View>
+      </ScrollView>
     </View>
+
   );
 };
 
