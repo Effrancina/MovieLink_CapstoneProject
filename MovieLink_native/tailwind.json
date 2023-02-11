@@ -47,6 +47,12 @@
 			"marginBottom": 80
 		}
 	},
+	"mx-3": {
+		"style": {
+			"marginLeft": 12,
+			"marginRight": 12
+		}
+	},
 	"mb-7": {
 		"style": {
 			"marginBottom": 28
@@ -72,6 +78,21 @@
 			"marginTop": 8
 		}
 	},
+	"mb-10": {
+		"style": {
+			"marginBottom": 40
+		}
+	},
+	"mt-3": {
+		"style": {
+			"marginTop": 12
+		}
+	},
+	"mb-20": {
+		"style": {
+			"marginBottom": 80
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
@@ -92,6 +113,16 @@
 			"height": 240
 		}
 	},
+	"h-48": {
+		"style": {
+			"height": 192
+		}
+	},
+	"h-96": {
+		"style": {
+			"height": 384
+		}
+	},
 	"w-60": {
 		"style": {
 			"width": 240
@@ -105,6 +136,16 @@
 	"w-32": {
 		"style": {
 			"width": 128
+		}
+	},
+	"w-48": {
+		"style": {
+			"width": 192
+		}
+	},
+	"w-28": {
+		"style": {
+			"width": 112
 		}
 	},
 	"flex-1": {
@@ -130,6 +171,22 @@
 			"borderTopRightRadius": 8,
 			"borderBottomRightRadius": 8,
 			"borderBottomLeftRadius": 8
+		}
+	},
+	"rounded-sm": {
+		"style": {
+			"borderTopLeftRadius": 2,
+			"borderTopRightRadius": 2,
+			"borderBottomRightRadius": 2,
+			"borderBottomLeftRadius": 2
+		}
+	},
+	"rounded-md": {
+		"style": {
+			"borderTopLeftRadius": 6,
+			"borderTopRightRadius": 6,
+			"borderBottomRightRadius": 6,
+			"borderBottomLeftRadius": 6
 		}
 	},
 	"border-zinc-900": {
@@ -168,6 +225,16 @@
 			"paddingRight": 12,
 			"paddingBottom": 12,
 			"paddingLeft": 12
+		}
+	},
+	"pb-48": {
+		"style": {
+			"paddingBottom": 192
+		}
+	},
+	"pt-48": {
+		"style": {
+			"paddingTop": 192
 		}
 	},
 	"text-center": {

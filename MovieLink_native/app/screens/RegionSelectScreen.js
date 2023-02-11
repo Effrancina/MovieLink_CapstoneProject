@@ -15,7 +15,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import SafeViewAndroid from "../components/SafeViewAndroid";
 import { getAllRegions } from "../services/RegionServices";
 import { SelectList } from "react-native-dropdown-select-list";
 import {
@@ -76,8 +75,7 @@ const RegionSelectScreen = () => {
 
         <StatusBar style="auto" className="text-white" />
         <Text className="text-lg my-10 text-white font-bold text-center">
-          {" "}
-          Select Your Country Below
+          Select Your Regions Below
         </Text>
 
         <View className="p-3">
@@ -122,7 +120,7 @@ const RegionSelectScreen = () => {
         <View className="flex-row justify-center mt-10">
           <Image
             source={{uri:"https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/Hero.png?w=769"}}
-            className="h-32 w-60"
+            className="h-32 w-60 rounded-md"
             accessibilityLabel="Movie poster">
           </Image>
         </View>

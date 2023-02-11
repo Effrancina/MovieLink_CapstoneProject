@@ -28,6 +28,7 @@ public class DataLoader implements ApplicationRunner {
 
 
         Region region3 = new Region("US", "Netflix");
+        
 
 
 
