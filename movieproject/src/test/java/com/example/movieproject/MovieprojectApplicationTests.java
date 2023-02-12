@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ActiveProfiles("test")
 @SpringBootTest
-class MovieprojectApplicationTests {
+class MovieProjectApplicationTests {
 	@Autowired
 	MovieRepository movieRepository;
 	@Autowired
@@ -32,7 +32,7 @@ class MovieprojectApplicationTests {
 	public void addMovie(){
 
 		Region region = new Region("GB", "Netflix");
-		Movie movie = new Movie("All Quiet on the Western Front");
+		Movie movie = new Movie("All Quiet on the Western Front", "301006503/s718/all-quiet-on-the-western-front",7.8);
 		region.addMovie(movie);
 		movieRepository.save(movie);
 		regionRepository.save(region);
