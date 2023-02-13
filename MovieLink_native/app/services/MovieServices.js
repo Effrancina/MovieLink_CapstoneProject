@@ -1,9 +1,23 @@
-const baseURL = "http://192.168.1.128:8080"
+const baseURL = "http://192.168.100.133:8080"
 
-export const getAllMovies = () => {
+export const getAllMovies = (setMovies) => {
     return fetch(baseURL + "/movies")
         .then (res => res.json())
+        .then((moviesData) => {
+            setMovies(moviesData);
+        })
+        .catch((err) => console.error(err))
     }
+
+// export const getAllMoviesForFilter = (setMovies, setMovies2) => {
+//     return fetch(baseURL + "/movies")
+//         .then (res => res.json())
+//         .then((moviesData) => { 
+//             setMovies(moviesData);
+//             setMovies2(moviesData)
+//         })
+//         .catch((err) => console.error(err))
+//         }
 
  export const getMoviesRegion1=(setMovies1,id1) => {
         return fetch(baseURL +"/movies?region=" + id1)

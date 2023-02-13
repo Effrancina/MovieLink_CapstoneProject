@@ -8,22 +8,30 @@ import {
     HomeIcon,
     InformationCircleIcon
   } from "react-native-heroicons/outline";
+import { useNavigation } from "@react-navigation/native";
 
 const Footer = () => {
+  const navigation = useNavigation();
+
   return (
     <View className="bg-[#313d4a] flex-0.5 py-5 border-t-4" >
         <View className="flex-row justify-around items-center ">
-
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('Region Select Screen')}}>
             <HomeIcon size={40} color="white"></HomeIcon>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('Search Movie Screen')
+              }}>
             <MagnifyingGlassIcon size={40} color="white"></MagnifyingGlassIcon>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('Information Screen')
+              }}>
             <InformationCircleIcon size={40} color="white"></InformationCircleIcon>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+              }}>
             <UserIcon size={40} color="white"></UserIcon>
         </TouchableOpacity>
             
@@ -32,4 +40,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default Footer;
