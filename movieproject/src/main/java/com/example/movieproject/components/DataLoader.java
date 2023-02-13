@@ -31,7 +31,6 @@ public class DataLoader implements ApplicationRunner {
         Region region8 = new Region("Australia", "Disney Plus");
         Region region9 = new Region("Australia", "Netflix");
 
-
         regionRepository.save(region1);
         regionRepository.save(region2);
         regionRepository.save(region3);
@@ -41,16 +40,6 @@ public class DataLoader implements ApplicationRunner {
         regionRepository.save(region7);
         regionRepository.save(region8);
         regionRepository.save(region9);
-
-
-
-
-
-
-
-
-
-
 
 
     }

@@ -15,6 +15,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     List<Movie> findAllByTitle(String title);
 
-    List<Movie> findMoviesByRegionsIdContains(Long regionId1, Long regionId2);
+
 
 }

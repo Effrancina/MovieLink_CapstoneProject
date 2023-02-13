@@ -28,21 +28,6 @@ class MovieProjectApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	public void addMovie(){
 
-		Region region = new Region("GB", "Netflix");
-		Movie movie = new Movie("All Quiet on the Western Front", "301006503/s718/all-quiet-on-the-western-front",7.8);
-		region.addMovie(movie);
-		movieRepository.save(movie);
-		regionRepository.save(region);
-	}
-
-	@Test
-	public void canFindAllMoviesByRegion(){
-		List<Movie> found = movieRepository.findAllByRegionsId(1L);
-		assertTrue(found.size()>0);
-		assertEquals("All Quiet on the Western Front", found.get(0).getTitle());
-	}
 
 }

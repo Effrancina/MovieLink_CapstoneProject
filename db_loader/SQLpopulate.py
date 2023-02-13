@@ -24,7 +24,7 @@ just_watch_us = JustWatch(country='US')
 just_watch_au = JustWatch(country='AU')
 # then we create a list of these
 regions = [just_watch_gb,just_watch_us,just_watch_au]
-region_names = ['Great Britain', 'Unithed States', 'Australia']
+region_names = ['Great Britain', 'United States', 'Australia']
 
 # give our database name
 db = client["films"]
@@ -49,6 +49,20 @@ collections = [amazon_prime_gb,
     netflix_us,netflix_au
     ]
 
+def filter_res(id, region, platform, item):
+    imdb_index = next((index for (index, d) in enumerate(item["scoring"]) if d["provider_type"] == "imdb:score"), None)
+    obj = {
+        "title": item["title"],
+        "poster": item["poster"],
+        "score": item["scoring"][imdb_index]["value"] if imdb_index else 0,
+        "regions": [{
+            "id": id,
+            "regionName": region,
+            "platform": platform
+        }]
+    }
+    return obj
+
 index = 0
 # iterate over the regions
 for i in range(3):
@@ -63,34 +77,22 @@ for i in range(3):
                 content_types=['movie'],
                 page=k+1)
             
-            f = lambda lst: filter(index, region_names[i], platform_names[j], lst)
+            f = lambda lst: filter_res(index, region_names[i], platform_names[j], lst)
             filtered = map(f, results["items"])
 
             for item in filtered:
-                cur.execute("SELECT id FROM movies Where title=%s;",(item["title"]))
+                cur.execute("SELECT id FROM movies Where title=%s;",[item["title"]])
                 if (table_id := cur.fetchone()):
-                    url = f'localhost:8080/movies/{table_id}'
+                    url = f'http://localhost:8080/movies/{table_id}'
                     requests.put(url, json=item)
                 else:
-                    url = 'localhost:8080/movies'
+                    url = 'http://localhost:8080/movies'
                     requests.post(url, json=item)
             
             #result = db.collection[index].insert_many(filtered)
         #this index is for itirating thruogh the page numbers and collections
         index+=1
 
-def filter(id, region, platform, item):
-    imdb_index = next((index for (index, d) in enumerate(item["score"]) if d["provider_type"] == "imdb:score"), None)
-    obj = {
-        "title": item["title"],
-        "poster": item["poster"],
-        "score": item["scoring"][imdb_index]["value"],
-        "region": [{
-            "id": id,
-            "regionName": region,
-            "platform": platform
-        }]
-    }
 
 # make changes permanant
 conn.commit()
