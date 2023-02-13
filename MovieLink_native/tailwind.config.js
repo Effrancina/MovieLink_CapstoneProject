@@ -20,6 +20,12 @@ module.exports = {
       },
       colors: {
         purple: '#B9AEE0',
+        black: "#19232E",
+        white: "#FFF",
+        green: "#62DFB7",
+        indigo: '#5c6ac4',
+        blue: '#007ace',
+        red: '#de3618'
     },
   }
 }

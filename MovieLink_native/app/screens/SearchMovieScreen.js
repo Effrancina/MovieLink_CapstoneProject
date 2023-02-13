@@ -107,7 +107,7 @@ const getItem = (item) => {
 
 
 return (
-<View className="flex-1">
+<View className="flex-1 bg-black pb-50">
   <View>
       <Header></Header>
       {/* <View className="flex-row items-center space-x-2 pb-2 mx-4"> */}
@@ -122,6 +122,7 @@ return (
               value={search}
             />
             <FlatList
+              className=" bg-black"
               data={filteredMovies}
               keyExtractor={(item, index) => index.toString()}
               renderItem={ItemView}
