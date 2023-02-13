@@ -12,10 +12,14 @@ module.exports = {
         white: "#FFF",  
         black: "#19232E", 
         green: "#62DFB7",
+        purple: "#B9AEE0"
       },
     theme:{
       fontFamily: {
         sans: ['"PT Sans"', 'sans-serif']
-      }
-    }
-    }
+      },
+      colors: {
+        purple: '#B9AEE0',
+    },
+  }
+}
