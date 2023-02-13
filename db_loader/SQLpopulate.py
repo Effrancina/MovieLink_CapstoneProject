@@ -50,7 +50,9 @@ collections = [amazon_prime_gb,
     ]
 
 def filter_res(id, region, platform, item):
-    imdb_index = next((index for (index, d) in enumerate(item["scoring"]) if d["provider_type"] == "imdb:score"), None)
+    imdb_index = None
+    if item.get("scoring"):
+        imdb_index = next((index for (index, d) in enumerate(item["scoring"]) if d["provider_type"] == "imdb:score"), None)
     obj = {
         "title": item["title"],
         "poster": item["poster"] if item.get("poster") else "",
