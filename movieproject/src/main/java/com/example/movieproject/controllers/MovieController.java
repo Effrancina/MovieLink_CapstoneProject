@@ -36,7 +36,7 @@ public class MovieController {
     }
 
     @PutMapping(value="/movies/{id}")
-    public ResponseEntity updateMovie(@PathVariable Long id, @RequestBody Movie movieDetails){
+    public ResponseEntity updateMovieById(@PathVariable Long id, @RequestBody Movie movieDetails){
         Movie updateMovie = movieRepository.findById(id).get();
         updateMovie.addToRegions((Region) movieDetails.getRegions().get(0));
         movieRepository.save(updateMovie);

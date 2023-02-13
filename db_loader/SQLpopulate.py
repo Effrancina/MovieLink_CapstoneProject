@@ -83,7 +83,7 @@ for i in range(3):
             for item in filtered:
                 cur.execute("SELECT id FROM movies Where title=%s;",[item["title"]])
                 if (table_id := cur.fetchone()):
-                    url = f'http://localhost:8080/movies/{table_id}'
+                    url = f'http://localhost:8080/movies/{table_id[0]}'
                     requests.put(url, json=item)
                 else:
                     url = 'http://localhost:8080/movies'
