@@ -53,7 +53,7 @@ def filter_res(id, region, platform, item):
     imdb_index = next((index for (index, d) in enumerate(item["scoring"]) if d["provider_type"] == "imdb:score"), None)
     obj = {
         "title": item["title"],
-        "poster": item["poster"],
+        "poster": item["poster"] if item.get("poster") else "",
         "score": item["scoring"][imdb_index]["value"] if imdb_index else 0,
         "regions": [{
             "id": id,
@@ -77,7 +77,7 @@ for i in range(3):
                 content_types=['movie'],
                 page=k+1)
             
-            f = lambda lst: filter_res(index, region_names[i], platform_names[j], lst)
+            f = lambda lst: filter_res(index+1, region_names[i], platform_names[j], lst)
             filtered = map(f, results["items"])
 
             for item in filtered:
