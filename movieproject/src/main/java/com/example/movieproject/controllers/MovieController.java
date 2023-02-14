@@ -24,7 +24,7 @@ public class MovieController {
             @RequestParam(name="title",required=false) String title,
             @RequestParam(name ="region2", required = false) Long id2) {
         if(id != null && id2 != null){
-            return new ResponseEntity<>(movieRepository.findAllByRegionsIdOrRegionsId(id, id2), HttpStatus.OK);
+            return new ResponseEntity<>(movieRepository.findAllBy2RegionsId(id, id2), HttpStatus.OK);
         }
         if(id != null){
             return new ResponseEntity<>(movieRepository.findAllByRegionsId(id), HttpStatus.OK);
@@ -65,6 +65,12 @@ public class MovieController {
             @PathVariable("id2") Long id2){
         return new ResponseEntity<>(movieRepository.findAllByRegionsIdAndRegionsId(id1, id2), HttpStatus.OK);
     }
+
+    @PostMapping(value="/movies/search")
+    public ResponseEntity<List<Movie>> getMoviesComplexQuery(@RequestBody JSONObject ){
+
+    }
+
 
 }
 
