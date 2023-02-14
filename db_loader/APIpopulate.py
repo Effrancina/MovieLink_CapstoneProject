@@ -3,7 +3,7 @@
 # and psycopg to connect to postgres
 from justwatch import JustWatch
 from pymongo import MongoClient
-import psycopg2
+# import psycopg2
 import requests
 
 # connect to MongoDB endpoint
@@ -91,12 +91,12 @@ for i in range(3):
                     requests.post(url, json=item)
             
             #result = db.collection[index].insert_many(filtered)
-        #this index is for itirating thruogh the page numbers and collections
+        #this index is for iterating through the page numbers and collections
         index+=1
 
 
 
-# make changes permanant
+# commit changes
 # conn.commit()
 # Close communication with database
 #cur.close()
