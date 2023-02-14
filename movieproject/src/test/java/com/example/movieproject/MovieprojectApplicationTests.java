@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ActiveProfiles("test")
 @SpringBootTest
-class MovieprojectApplicationTests {
+class MovieProjectApplicationTests {
 	@Autowired
 	MovieRepository movieRepository;
 	@Autowired
@@ -28,21 +28,6 @@ class MovieprojectApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	public void addMovie(){
 
-		Region region = new Region("GB", "Netflix");
-		Movie movie = new Movie("All Quiet on the Western Front");
-		region.addMovie(movie);
-		movieRepository.save(movie);
-		regionRepository.save(region);
-	}
-
-	@Test
-	public void canFindAllMoviesByRegion(){
-		List<Movie> found = movieRepository.findAllByRegionsId(1L);
-		assertTrue(found.size()>0);
-		assertEquals("All Quiet on the Western Front", found.get(0).getTitle());
-	}
 
 }

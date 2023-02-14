@@ -15,6 +15,12 @@ public class Movie {
     private Long id;
     @Column(name = "title")
     private String title;
+
+    @Column(name="poster")
+    private String poster;
+
+    @Column(name="score")
+    private double score;
     @ManyToMany
     @JsonIgnoreProperties({"movies"})
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
@@ -39,8 +45,10 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String title) {
+    public Movie(String title, String poster, double score) {
         this.title = title;
+        this.poster = poster;
+        this.score = score;
         this.regions = new ArrayList<>();
     }
 
@@ -59,6 +67,22 @@ public class Movie {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }
 
     public List<Region> getRegions() {
