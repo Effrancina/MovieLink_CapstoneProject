@@ -108,7 +108,7 @@ const getItem = (item) => {
 
 return (
 <View className="flex-1 bg-black">
-  <View className="mt-8 flex-1 justify-around">
+  <View className="mt-8 flex-1">
       <Header></Header>
       {/* <View className="flex-row items-center space-x-2 pb-2 mx-4"> */}
           {/* <View className="flex-2 space-x-2 bg-purple p-3 justify-around pb-20"> */}
@@ -129,7 +129,7 @@ return (
               data={filteredMovies}
               keyExtractor={(item, index) => index.toString()}
               renderItem={(ItemView)=>{
-                return <View className="bg-[#313d4a] mx-3 ">
+                return <View className="bg-[#313d4a] mx-3 my-1 rounded-lg">
                   <Text className="text-white text-xl my-2 mx-4">
                     {ItemView.item.title}
                   </Text>

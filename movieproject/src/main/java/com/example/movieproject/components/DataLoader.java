@@ -28,7 +28,8 @@ public class DataLoader implements ApplicationRunner {
 
 
         Region region3 = new Region("US", "Netflix");
-        
+        Region region4 = new Region("GB", "Amazon Prime");
+
 
 
 
@@ -37,6 +38,7 @@ public class DataLoader implements ApplicationRunner {
         region1.addMovie(movie);
         region2.addMovie(movie);
         region3.addMovie(movie);
+        region4.addMovie(movie);
 
 
 
@@ -181,6 +183,7 @@ public class DataLoader implements ApplicationRunner {
         regionRepository.save(region1);
         regionRepository.save(region2);
         regionRepository.save(region3);
+        regionRepository.save(region4);
 
 
 

@@ -47,6 +47,7 @@ const RegionSelectScreen = () => {
 
   function makeObject() {
     const newObject = regions.map((region) => {
+      console.log(region.platform)
       return {
         key: region.id,
         value: region.regionName,
@@ -66,8 +67,8 @@ const RegionSelectScreen = () => {
           Select Your Regions Below
         </Text>
 
-        <DropDownMenu justRegions={justRegions} setSelected={setSelected}></DropDownMenu>
-        <DropDownMenu justRegions={justRegions} setSelected={setSelected}></DropDownMenu>
+        <DropDownMenu justData={justRegions} setSelected={setSelected}></DropDownMenu>
+        <DropDownMenu justData={justRegions} setSelected={setSelected}></DropDownMenu>
 
        
 
@@ -75,7 +76,7 @@ const RegionSelectScreen = () => {
           <TouchableOpacity
             className="rounded-lg bg-[#62DFB7] p-3 w-60 mt-5 "
             onPress={() =>
-              navigation.navigate("Movie List", { id1: selected, id2: selected2 })
+              navigation.navigate("Filter Screen", { id1: selected, id2: selected2 })
             }
             selected={selected}
           >

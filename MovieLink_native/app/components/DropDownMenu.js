@@ -13,7 +13,7 @@ const DropDownMenu = (props) => {
             inputStyles={{ fontWeight: "bold" }}
             placeholder="Select Region"
             setSelected={(val) => props.setSelected(val)}
-            data={props.justRegions}
+            data={props.justData}
             save="key"
           />
         </View>
