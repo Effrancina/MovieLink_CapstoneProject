@@ -29,6 +29,11 @@ public class MovieController {
         return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping(value="/movies/random")
+    public ResponseEntity<Movie>getRandomMovie(){
+        return new ResponseEntity<>(movieRepository.findRandomMovie(), HttpStatus.OK);
+    }
+
     @PostMapping(value="/movies")
     public ResponseEntity<List<Movie>> postMovies(@RequestBody ArrayList<Movie> movies){
         for (Movie movie : movies){
