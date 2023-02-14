@@ -63,7 +63,7 @@ const MovieListScreen = ({ route }) => {
 
   return (
     <View className="bg-[#19232E] font-bold flex-1">
-      <View className="mt-24 flex-1">
+      <View className="mt-12 flex-1">
         <Header></Header>
 
         <StatusBar style="auto" />
@@ -72,9 +72,9 @@ const MovieListScreen = ({ route }) => {
           We found these Movies for you!
         </Text>
 
-        <View className="pb-100 pl-4">
+        <View className="pl-4">
           <FlatList
-            contentContainerStyle={{ paddingBottom: 400 }}
+            contentContainerStyle={{ paddingBottom: 200 }}
             data={moviesFound}
             renderItem={(itemData) => {
               return (
