@@ -20,20 +20,28 @@ public class MovieController {
 
     @GetMapping(value="/movies")
     public ResponseEntity<List<Movie>> getAllMovies(
-            @RequestParam(name ="region", required = false) Long id1,
-            @RequestParam(name ="title", required = false) String title){
-        if (id1 != null) {
-            return new ResponseEntity<>(movieRepository.findAllByRegionsId(id1), HttpStatus.OK);
-        } else if (title != null) {
-            return new ResponseEntity<>(movieRepository.findAllByTitle(title), HttpStatus.OK);
+            @RequestParam(name ="region", required = false) Long id,
+            @RequestParam(name="title",required=false) String title) {
+        if(id != null){
+            return new ResponseEntity<>(movieRepository.findAllByRegionsId(id), HttpStatus.OK);
+        }
+        if(title != null){
+            return new ResponseEntity<>(movieRepository.findMovieByTitle(title), HttpStatus.OK);
         }
         return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
     }
 
+
     @GetMapping(value="/movies/{id}")
-    public ResponseEntity getMovie(@PathVariable Long id){
+    public ResponseEntity getMovie(@PathVariable Long id) {
         return new ResponseEntity<>(movieRepository.findById(id), HttpStatus.OK);
     }
+
+    @GetMapping(value="/movies/random")
+    public ResponseEntity<Movie>getRandomMovie(){
+        return new ResponseEntity<>(movieRepository.findRandomMovie(), HttpStatus.OK);
+    }
+
 
     @PutMapping(value="/movies/{id}")
     public ResponseEntity updateMovieById(@PathVariable Long id, @RequestBody Movie movieDetails){
