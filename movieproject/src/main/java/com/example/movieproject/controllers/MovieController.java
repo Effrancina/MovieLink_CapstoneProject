@@ -21,7 +21,11 @@ public class MovieController {
     @GetMapping(value="/movies")
     public ResponseEntity<List<Movie>> getAllMovies(
             @RequestParam(name ="region", required = false) Long id,
-            @RequestParam(name="title",required=false) String title) {
+            @RequestParam(name="title",required=false) String title,
+            @RequestParam(name ="region2", required = false) Long id2) {
+        if(id != null && id2 != null){
+            return new ResponseEntity<>(movieRepository.findAllByRegionsIdOrRegionsId(id, id2), HttpStatus.OK);
+        }
         if(id != null){
             return new ResponseEntity<>(movieRepository.findAllByRegionsId(id), HttpStatus.OK);
         }
@@ -31,17 +35,16 @@ public class MovieController {
         return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
     }
 
+    @PostMapping(value="/movies")
+    public ResponseEntity<Movie> postMovies(@RequestBody Movie movie){
+        movieRepository.save(movie);
+        return new ResponseEntity<>(movie, HttpStatus.CREATED);
+    }
 
     @GetMapping(value="/movies/{id}")
     public ResponseEntity getMovie(@PathVariable Long id) {
         return new ResponseEntity<>(movieRepository.findById(id), HttpStatus.OK);
     }
-
-    @GetMapping(value="/movies/random")
-    public ResponseEntity<Movie>getRandomMovie(){
-        return new ResponseEntity<>(movieRepository.findRandomMovie(), HttpStatus.OK);
-    }
-
 
     @PutMapping(value="/movies/{id}")
     public ResponseEntity updateMovieById(@PathVariable Long id, @RequestBody Movie movieDetails){
@@ -51,13 +54,17 @@ public class MovieController {
         return new ResponseEntity<>(updateMovie, HttpStatus.OK);
     }
 
-    @PostMapping(value="/movies")
-    public ResponseEntity<Movie> postMovies(@RequestBody Movie movie){
-        movieRepository.save(movie);
-        return new ResponseEntity<>(movie, HttpStatus.CREATED);
+    @GetMapping(value="/movies/random")
+    public ResponseEntity<Movie>getRandomMovie(){
+        return new ResponseEntity<>(movieRepository.findRandomMovie(), HttpStatus.OK);
     }
 
-
+    @GetMapping(value="/movies/regions/{id1}/{id2}")
+    public ResponseEntity getMovieInTwoRegions(
+            @PathVariable("id1") Long id1,
+            @PathVariable("id2") Long id2){
+        return new ResponseEntity<>(movieRepository.findAllByRegionsIdAndRegionsId(id1, id2), HttpStatus.OK);
+    }
 
 }
 

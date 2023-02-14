@@ -112,7 +112,7 @@ public class DataLoader implements ApplicationRunner {
         region5.addMovie(fightClub);
         region6.addMovie(fightClub);
         region7.addMovie(fightClub);
-        
+
 
         Movie pokemon = new Movie("Pokemon", "/poster/8731868/s592/the-lord-of-the-rings-the-fellowship-of-the-ring.webp", 5);
         movieRepository.save(pokemon);
