@@ -107,25 +107,35 @@ const getItem = (item) => {
 
 
 return (
-<View className="flex-1 bg-black pb-50">
-  <View>
+<View className="flex-1 bg-black">
+  <View className="mt-8 flex-1 justify-around">
       <Header></Header>
       {/* <View className="flex-row items-center space-x-2 pb-2 mx-4"> */}
           {/* <View className="flex-2 space-x-2 bg-purple p-3 justify-around pb-20"> */}
 
             <SearchBar
-              round
-              searchIcon={{ size: 24 }}
+              searchIcon={{ size: 24,color:"black" }}
+              containerStyle={{backgroundColor: "#B9AEE0", borderRadius:20,margin:12}}
+              inputContainerStyle={{backgroundColor: "#B9AEE0"}}
+              inputStyle = {{fontWeight: "bold", color:"black"}}
+              placeholderTextColor="black"
               onChangeText={(text) => searchFilterFunction(text)}
               onClear={(text) => searchFilterFunction('')}
               placeholder="Type Here..."
               value={search}
             />
             <FlatList
-              className=" bg-black"
+              className=" bg-black text-white my-3"
               data={filteredMovies}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={ItemView}
+              renderItem={(ItemView)=>{
+                return <View className="bg-[#313d4a] mx-3 ">
+                  <Text className="text-white text-xl my-2 mx-4">
+                    {ItemView.item.title}
+                  </Text>
+                </View>
+              }}
+              
             />
           {/* </View> */}
   <Footer></Footer>

@@ -14,25 +14,29 @@ const Footer = () => {
   const navigation = useNavigation();
 
   return (
-    <View className="bg-[#313d4a] flex-0.5 py-5 border-t-4" >
+    <View className="bg-[#313d4a] flex-0.5 py-3 border-t-4" >
         <View className="flex-row justify-around items-center ">
-        <TouchableOpacity onPress={() => {
+        <TouchableOpacity className ="items-center" onPress={() => {
           navigation.navigate('Region Select Screen')}}>
-            <HomeIcon size={40} color="white"></HomeIcon>
+            <HomeIcon size={30} color="white"></HomeIcon>
+            <Text className="text-white">Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
+        <TouchableOpacity className ="items-center" onPress={() => {
           navigation.navigate('Search Movie Screen')
               }}>
-            <MagnifyingGlassIcon size={40} color="white"></MagnifyingGlassIcon>
+            <MagnifyingGlassIcon size={30} color="white"></MagnifyingGlassIcon>
+            <Text className="text-white">Search</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
+        <TouchableOpacity className ="items-center" onPress={() => {
           navigation.navigate('Information Screen')
               }}>
-            <InformationCircleIcon size={40} color="white"></InformationCircleIcon>
+            <InformationCircleIcon size={30} color="white"></InformationCircleIcon>
+            <Text className="text-white">App Info</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
+        <TouchableOpacity className ="items-center" onPress={() => {
               }}>
-            <UserIcon size={40} color="white"></UserIcon>
+            <UserIcon size={30} color="white"></UserIcon>
+            <Text className="text-white">Login</Text>
         </TouchableOpacity>
             
         </View>

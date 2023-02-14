@@ -1,4 +1,4 @@
-const baseURL = "http://192.168.100.133:8080"
+const baseURL = "http://192.168.100.127:8080"
 
 export const getAllRegions = (setRegions) => {
     return fetch(baseURL + "/regions")
