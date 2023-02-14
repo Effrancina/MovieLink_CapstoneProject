@@ -57,7 +57,7 @@ const RegionSelectScreen = () => {
 
   return (
     <View className="bg-[#19232E] font-bold flex-1">
-      <ScrollView className="mt-7">
+      <ScrollView className="mt-10">
 
         <Header></Header>
 
