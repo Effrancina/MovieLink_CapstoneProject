@@ -1,4 +1,4 @@
-const baseURL = "http://192.168.100.127:8080"
+const baseURL = "http://192.168.1.128:8080"
 
 export const getAllMovies = (setMovies) => {
     return fetch(baseURL + "/movies")
@@ -30,6 +30,13 @@ export const getAllMovies = (setMovies) => {
         return fetch(baseURL +"/movies?region=" + id2)
         .then(res => res.json())
         .then((moviesData) => setMovies2(moviesData))
+        .catch((err) => console.error(err))
+    }
+
+ export const getRandomMovie=(setMovie) => {
+        return fetch(baseURL +"/movies/random")
+        .then(res => res.json())
+        .then((moviesData) => setMovie(moviesData))
         .catch((err) => console.error(err))
     }
 

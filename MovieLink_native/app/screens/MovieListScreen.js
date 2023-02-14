@@ -62,8 +62,8 @@ const MovieListScreen = ({ route }) => {
   }, [movies2, movies1]);
 
   return (
-    <View className="bg-[#19232E] font-bold justify-around">
-      <View className="mt-24 ">
+    <View className="bg-[#19232E] font-bold flex-1">
+      <View className="mt-24 flex-1">
         <Header></Header>
 
         <StatusBar style="auto" />

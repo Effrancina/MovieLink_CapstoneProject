@@ -3,6 +3,7 @@ import React from 'react'
 import { SelectList } from "react-native-dropdown-select-list";
 
 const DropDownMenu = (props) => {
+  // console.log(props)
   return (
     <View className="p-3">
         <SelectList

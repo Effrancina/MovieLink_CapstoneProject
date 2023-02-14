@@ -47,15 +47,29 @@ const RegionSelectScreen = () => {
 
   function makeObject() {
     const newObject = regions.map((region) => {
-      console.log(region.platform)
       return {
         key: region.id,
         value: region.regionName,
       };
     });
-    setJustRegions(newObject);
+
+    const regionsToShow = [];
+    const regionTracker = [];
+
+    newObject.forEach((region) => {
+      if (!regionTracker.includes(region.value)) {
+        regionsToShow.push(region);
+        regionTracker.push(region.value);
+      }
+   
+    })
+  
+    setJustRegions(regionsToShow);
+
   }
 
+
+  
   return (
     <View className="bg-[#19232E] font-bold flex-1">
       <ScrollView className="mt-10">
@@ -68,9 +82,8 @@ const RegionSelectScreen = () => {
         </Text>
 
         <DropDownMenu justData={justRegions} setSelected={setSelected}></DropDownMenu>
-        <DropDownMenu justData={justRegions} setSelected={setSelected}></DropDownMenu>
+        <DropDownMenu justData={justRegions} setSelected={setSelected2}></DropDownMenu>
 
-       
 
         <View className="flex-row justify-center border-white">
           <TouchableOpacity
@@ -78,7 +91,7 @@ const RegionSelectScreen = () => {
             onPress={() =>
               navigation.navigate("Filter Screen", { id1: selected, id2: selected2 })
             }
-            selected={selected}
+            
           >
             <Text className="text-center text-black text-lg font-bold">
               Get Available Movies
