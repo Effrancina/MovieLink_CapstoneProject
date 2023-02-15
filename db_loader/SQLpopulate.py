@@ -9,7 +9,7 @@ import requests
 # connect to MongoDB endpoint
 client = MongoClient("mongodb://127.0.0.1:27017")
 # connect to postgres database
-conn = psycopg2.connect("dbname=movies user=user") # change to username
+conn = psycopg2.connect("dbname=films user=user") # change to username
 cur = conn.cursor()
 # create a list to store our page numbers
 # ordered for GB-amp, GB-dnp, GB-nfx, US-amp, ... AU-nfx

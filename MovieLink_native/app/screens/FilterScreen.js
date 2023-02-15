@@ -33,7 +33,6 @@ const FilterScreen = (props) => {
     const platformListA = selected.map(id => {
         return {"region":  id+ id1-1}
     })
-    console.log("platformListA", platformListA)
     // const user1 = JSON.stringify(platformListA)
     // console.log("user1", user1)
     // const user1 = Object.fromEntries(platformListA)
