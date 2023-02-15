@@ -227,12 +227,12 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query( value= "SELECT * FROM movies ORDER BY random() limit 1", nativeQuery = true)
     Movie findRandomMovie();
 
-    @Query(value="WITH movies1 AS (SELECT movies.id AS mid\n" +
+    @Query(value="WITH movies1 AS (SELECT DISTINCT movies.id AS mid\n" +
             "FROM movies\n" +
             "INNER JOIN regions_movies\n" +
             "ON movies.id = regions_movies.movie_id\n" +
             "WHERE regions_movies.region_id = ?2)\n" +
-            "SELECT movies.id, movies.poster, movies.score, movies.title FROM movies1\n" +
+            "SELECT DISTINCT movies.id, movies.poster, movies.score, movies.title FROM movies1\n" +
             "INNER JOIN movies\n" +
             "ON movies1.mid = movies.id\n" +
             "INNER JOIN regions_movies\n" +
