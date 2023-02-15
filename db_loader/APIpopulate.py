@@ -2,12 +2,12 @@
 # and pymongo to use MongoDB client 
 # and psycopg to connect to postgres
 from justwatch import JustWatch
-from pymongo import MongoClient
+# from pymongo import MongoClient
 # import psycopg2
 import requests
 
 # connect to MongoDB endpoint
-client = MongoClient("mongodb://127.0.0.1:27017")
+# client = MongoClient("mongodb://127.0.0.1:27017")
 # connect to postgres database
 # conn = psycopg2.connect("dbname=movies user=user") # change to username
 # cur = conn.cursor()
@@ -27,30 +27,32 @@ regions = [just_watch_gb,just_watch_us,just_watch_au]
 region_names = ['Great Britain', 'United States', 'Australia']
 
 # give our database name
-db = client["films"]
+# db = client["films"]
 # give our database collections names
 # first for amazon prime
-amazon_prime_gb = db["amazon_prime_gb"]
-amazon_prime_us = db["amazon_prime_us"]
-amazon_prime_au = db["amazon_prime_au"]
+# amazon_prime_gb = db["amazon_prime_gb"]
+# amazon_prime_us = db["amazon_prime_us"]
+# amazon_prime_au = db["amazon_prime_au"]
 # then disney plus
-disney_plus_gb = db["disney_plus_gb"]
-disney_plus_us = db["disney_plus_us"]
-disney_plus_au = db["disney_plus_au"]
+# disney_plus_gb = db["disney_plus_gb"]
+# disney_plus_us = db["disney_plus_us"]
+# disney_plus_au = db["disney_plus_au"]
 # then netflix
-netflix_gb = db["netflix_gb"]
-netflix_us = db["netflix_us"]
-netflix_au = db["netflix_au"]
+# netflix_gb = db["netflix_gb"]
+# netflix_us = db["netflix_us"]
+# netflix_au = db["netflix_au"]
 # create a list of all the collections
-collections = [amazon_prime_gb,
-    amazon_prime_us,amazon_prime_au,
-    disney_plus_gb,disney_plus_us,
-    disney_plus_au,netflix_gb,
-    netflix_us,netflix_au
-    ]
+# collections = [amazon_prime_gb,
+#     amazon_prime_us,amazon_prime_au,
+#     disney_plus_gb,disney_plus_us,
+#     disney_plus_au,netflix_gb,
+#     netflix_us,netflix_au
+#     ]
 
 def filter_res(id, region, platform, item):
-    imdb_index = next((index for (index, d) in enumerate(item["scoring"]) if d["provider_type"] == "imdb:score"), None)
+    imdb_index = None
+    if item.get("scoring"):
+        imdb_index = next((index for (index, d) in enumerate(item["scoring"]) if d["provider_type"] == "imdb:score"), None)
     obj = {
         "title": item["title"],
         "poster": item["poster"] if item.get("poster") else "",
@@ -60,7 +62,9 @@ def filter_res(id, region, platform, item):
             "regionName": region,
             "platform": platform
         }]
+
     }
+    return obj
 
 index = 0
 # iterate over the regions
@@ -69,7 +73,7 @@ for i in range(3):
     # iterate over the platforms
     for j in range(3):
         platform = platforms[j]
-        # itterate over the pages
+        # iterate over the pages
         for k in range(pages[index]):
             results = region.search_for_item(
                 providers=[platform], 
@@ -81,10 +85,10 @@ for i in range(3):
 
             for item in filtered:
                 #cur.execute("SELECT id FROM movies Where title=%s;",(item["title"]))
-                get_url = item["title"].replace(" ", "%20")
+                get_url = "http://localhost:8080/movies?title="+item["title"].replace(" ", "%20")
                 res = requests.get(get_url)
                 if (json := res.json()):
-                    url = f'http://localhost:8080/movies/{json["id"]}'
+                    url = "http://localhost:8080/movies/"+str(json[0]["id"])
                     requests.put(url, json=item)
                 else:
                     url = 'http://localhost:8080/movies'

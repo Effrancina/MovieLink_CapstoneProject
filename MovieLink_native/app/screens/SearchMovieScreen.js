@@ -48,10 +48,6 @@ useEffect(() => {
 
 }, [movies]);
 
-// function movieTitle (movie, index) {
-//   return movie[index].title
-// }
-// console.log(movies)
 
 function makeMovieObject() {
   const newMovieObject = movies.map((movie) => {
