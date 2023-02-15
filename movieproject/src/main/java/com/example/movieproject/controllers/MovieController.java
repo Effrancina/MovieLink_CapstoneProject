@@ -68,7 +68,7 @@ public class MovieController {
     }
 
     @GetMapping(value="/movies/regions/{id1}/{id2}")
-    public ResponseEntity getMovieInTwoRegions(
+    public ResponseEntity<List<Movie>> getMovieInTwoRegions(
             @PathVariable("id1") Long id1,
             @PathVariable("id2") Long id2){
         return new ResponseEntity<>(movieRepository.findAllByRegionsIdAndRegionsId(id1, id2), HttpStatus.OK);
@@ -76,17 +76,24 @@ public class MovieController {
 
     @PostMapping(value="/movies/search")
     public ResponseEntity<List<Movie>> getMoviesComplexQuery(@RequestBody HashMap<String, ArrayList<HashMap<String, Long>>> json){
-        int user1Len = json.get("user1").size();
-        int user2Len = json.get("user2").size();
+        int user1Len = 0;
+        int user2Len = 0;
+        if (json.containsKey("user1") && json.containsKey("user2")){
+            user1Len = json.get("user1").size();
+            user2Len = json.get("user2").size();
+        }
         List<Long> user1Ids = new ArrayList<Long>();
         List<Long> user2Ids = new ArrayList<Long>();
         List<Movie> user1List = new ArrayList<Movie>();
         List<Movie> user2List = new ArrayList<Movie>();
-        if(user1Len == 1 && user2Len == 1){
+        if(user1Len == 0 || user2Len == 0){
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.I_AM_A_TEAPOT);
+        }
+        else if(user1Len == 1 && user2Len == 1){
             return new ResponseEntity<>(movieRepository.findAllByRegionsIdAndRegionsId(
                     json.get("user1").get(0).get("region"),
                     json.get("user2").get(0).get("region")), HttpStatus.OK);
-        } else if (user1Len > 1 || user2Len > 1) {
+        } else {
             for (int index=0; index<3; index++) {
                 if (index<user1Len){
                     user1Ids.add((Long) json.get("user1").get(index).get("region"));
@@ -141,7 +148,6 @@ public class MovieController {
 
             return new ResponseEntity<>(finalList, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.I_AM_A_TEAPOT);
     }
 
 
