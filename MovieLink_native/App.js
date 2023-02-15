@@ -15,9 +15,9 @@ import MovieListScreen from "./app/screens/MovieListScreen";
 import RegionSelectScreen from "./app/screens/RegionSelectScreen";
 import SearchMovieScreen from "./app/screens/SearchMovieScreen";
 import InformationScreen from "./app/screens/InformationScreen";
+import FilterScreen from "./app/screens/FilterScreen";
+import RandomMovieScreen from "./app/screens/RandomMovieScreen";
 
-// import DetailsScreen from "./screens/DetailsScreen";
-// import ImportantStuff from "./screens/ImportantStuff";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -28,6 +28,8 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Region Select Screen" component={RegionSelectScreen}/>
           <Stack.Screen name="Movie List" component={MovieListScreen} />
+          <Stack.Screen name="Random Movie Screen" component={RandomMovieScreen} />
+          <Stack.Screen name="Filter Screen" component={FilterScreen} />
           <Stack.Screen name="Search Movie Screen" component={SearchMovieScreen} />
           <Stack.Screen name="Information Screen" component={InformationScreen} />
         </Stack.Navigator>
