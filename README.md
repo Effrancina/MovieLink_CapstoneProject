@@ -1,4 +1,4 @@
-# MovieLink - CapstoneProject
+# CapstoneProject: MovieLink
 ![movie watchers](https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/Hero.png?w=769)
 
 A 2 week project helping friends in different countries find movies they are both able to watch across multiple streaming platforms.
