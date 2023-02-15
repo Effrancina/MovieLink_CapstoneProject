@@ -1,4 +1,4 @@
-const baseURL = "http://192.168.1.128:8080"
+const baseURL = "http://192.168.100.127:8080"
 
 export const getAllMovies = (setMovies) => {
     return fetch(baseURL + "/movies")
@@ -19,17 +19,24 @@ export const getAllMovies = (setMovies) => {
 //         .catch((err) => console.error(err))
 //         }
 
- export const getMoviesRegion1=(setMovies1,id1) => {
-        return fetch(baseURL +"/movies?region=" + id1)
+ export const getMoviesRegion=(setMovies,region1id,region2id,provider1ids,provider2ids) => {
+    const platformListA = provider1ids.map(id => {
+        return {"region":  region1id+ id-1}
+    
+    })
+    // const user1 = JSON.stringify(platformListA)
+    const platformListB = provider2ids.map(id => {
+        return {"region":  region2id+ id-1}
+    
+    })
+    // const user2 = JSON.stringify(platformListB)
+    const userObject = {user1: platformListA, user2: platformListB}
+    const jsonObject = JSON.stringify(userObject)
+    console.log(jsonObject)
+    
+        return fetch(baseURL +"/movies/search", {method: "POST",body: jsonObject})
         .then(res => res.json())
-        .then((moviesData) => setMovies1(moviesData))
-        .catch((err) => console.error(err))
-    }
-
- export const getMoviesRegion2=(setMovies2,id2) => {
-        return fetch(baseURL +"/movies?region=" + id2)
-        .then(res => res.json())
-        .then((moviesData) => setMovies2(moviesData))
+        .then((moviesData) => setMovies(moviesData))
         .catch((err) => console.error(err))
     }
 

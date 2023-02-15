@@ -25,7 +25,7 @@ import {
 } from "react-native-heroicons/outline";
 import {
   getAllMovies,
-  getMoviesRegion1,
+  getMoviesRegion,
   getMoviesRegion2,
 } from "../services/MovieServices";
 import Header from "../components/Header";
@@ -35,8 +35,9 @@ const MovieListScreen = ({ route }) => {
   const [movies1, setMovies1] = useState([]);
   const [movies2, setMovies2] = useState([]);
   const navigation = useNavigation();
-  const { id1, id2 } = route.params;
+  const { region1id,region2id,provider1ids,provider2ids } = route.params;
   const [moviesFound, setMoviesFound] = useState([]);
+
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -45,9 +46,10 @@ const MovieListScreen = ({ route }) => {
   });
 
   useEffect(() => {
-    getMoviesRegion1(setMovies1, id1);
-    getMoviesRegion2(setMovies2, id2);
+    getMoviesRegion(setMovies1, region1id,region2id,provider1ids,provider2ids );
+    
   }, []);
+  console.log(route.params)
 
   useEffect(() => {
     if (movies1.length > 0 && movies2.length > 0) {
