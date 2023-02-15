@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @RestController
 public class MovieController {
@@ -22,7 +26,11 @@ public class MovieController {
     public ResponseEntity<List<Movie>> getAllMovies(
             @RequestParam(name ="region", required = false) Long id,
             @RequestParam(name="title",required=false) String title,
-            @RequestParam(name ="region2", required = false) Long id2) {
+            @RequestParam(name ="region2", required = false) Long id2,
+            @RequestParam(name ="region3", required = false) Long id3) {
+        if(id != null && id2 != null && id3 !=null){
+            return new ResponseEntity<>(movieRepository.findAllBy3RegionsId(id, id2, id3), HttpStatus.OK);
+        }
         if(id != null && id2 != null){
             return new ResponseEntity<>(movieRepository.findAllBy2RegionsId(id, id2), HttpStatus.OK);
         }
@@ -67,8 +75,73 @@ public class MovieController {
     }
 
     @PostMapping(value="/movies/search")
-    public ResponseEntity<List<Movie>> getMoviesComplexQuery(@RequestBody JSONObject ){
+    public ResponseEntity<List<Movie>> getMoviesComplexQuery(@RequestBody HashMap<String, ArrayList<HashMap<String, Long>>> json){
+        int user1Len = json.get("user1").size();
+        int user2Len = json.get("user2").size();
+        List<Long> user1Ids = new ArrayList<Long>();
+        List<Long> user2Ids = new ArrayList<Long>();
+        List<Movie> user1List = new ArrayList<Movie>();
+        List<Movie> user2List = new ArrayList<Movie>();
+        if(user1Len == 1 && user2Len == 1){
+            return new ResponseEntity<>(movieRepository.findAllByRegionsIdAndRegionsId(
+                    json.get("user1").get(0).get("region"),
+                    json.get("user2").get(0).get("region")), HttpStatus.OK);
+        } else if (user1Len > 1 || user2Len > 1) {
+            for (int index=0; index<3; index++) {
+                if (index<user1Len){
+                    user1Ids.add((Long) json.get("user1").get(index).get("region"));
+                }
+                if (index<user2Len){
+                    user2Ids.add((Long) json.get("user2").get(index).get("region"));
+                }
+            }
+            switch (user1Len) {
+                case 1:
+                    user1List = movieRepository.findAllByRegionsId((Long) user1Ids.get(0));
+                    break;
+                case 2:
+                    user1List = movieRepository.findAllBy2RegionsId(
+                            (Long) user1Ids.get(0),
+                            (Long) user1Ids.get(1));
+                    break;
+                case 3:
+                    user1List = movieRepository.findAllBy3RegionsId(
+                            (Long) user1Ids.get(0),
+                            (Long) user1Ids.get(1),
+                            (Long) user1Ids.get(2));
+                    break;
+            }
+            switch (user2Len) {
+                case 1:
+                    user2List = movieRepository.findAllByRegionsId((Long) user2Ids.get(0));
+                    break;
+                case 2:
+                    user2List = movieRepository.findAllBy2RegionsId(
+                            (Long) user2Ids.get(0),
+                            (Long) user2Ids.get(1));
+                    break;
+                case 3:
+                    user2List = movieRepository.findAllBy3RegionsId(
+                            (Long) user2Ids.get(0),
+                            (Long) user2Ids.get(1),
+                            (Long) user2Ids.get(2));
+                    break;
+            }
+            for (Movie movie:user1List) {
+                System.out.println(movie.getTitle());
+            }
+            System.out.println("break");
+            for (Movie movie:user2List) {
+                System.out.println(movie.getTitle());
+            }
 
+            List<Movie> finalList = user2List.stream()
+                    .filter(user1List::contains)
+                    .collect(Collectors.<Movie>toList());
+
+            return new ResponseEntity<>(finalList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.I_AM_A_TEAPOT);
     }
 
 
