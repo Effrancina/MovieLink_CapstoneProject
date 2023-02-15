@@ -74,7 +74,9 @@ Mitigation: Research over the weekend, use a plugin if we cannot find our own so
 
 ## Installation guide
 > python3 -m pip install JustWatch
+
 > Download Expo Go app on mobile device OR Android Studio on your computer
+
 > npm install on terminal
 
 ## DEMO
