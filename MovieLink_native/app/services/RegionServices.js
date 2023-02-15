@@ -7,6 +7,13 @@ export const getAllRegions = (setRegions) => {
        .catch((err) => console.error(err));
 }
 
+export const getRegionById = (setRegion,id) => {
+    return fetch(baseURL + "/regions/"+id)
+        .then (res => res.json())
+        .then((regionsData) => setRegion(regionsData))
+       .catch((err) => console.error(err));
+}
+
 
 
     

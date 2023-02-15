@@ -31,9 +31,6 @@ public class DataLoader implements ApplicationRunner {
         Region region8 = new Region("Australia", "Disney Plus");
         Region region9 = new Region("Australia", "Netflix");
 
-
-
-
         Movie movie = new Movie("All Quiet on the Western Front", "/poster/8731868/s592/the-lord-of-the-rings-the-fellowship-of-the-ring.webp", 8.4);
         movieRepository.save(movie);
         region1.addMovie(movie);
@@ -277,7 +274,5 @@ public class DataLoader implements ApplicationRunner {
         regionRepository.save(region7);
         regionRepository.save(region8);
         regionRepository.save(region9);
-
-
     }
 }
