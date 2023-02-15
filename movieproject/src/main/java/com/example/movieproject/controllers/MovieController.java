@@ -149,8 +149,6 @@ public class MovieController {
             return new ResponseEntity<>(finalList, HttpStatus.OK);
         }
     }
-
-
 }
 
 
