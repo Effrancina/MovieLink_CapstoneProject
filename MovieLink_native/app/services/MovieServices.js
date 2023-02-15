@@ -1,4 +1,4 @@
-const baseURL = "http://192.168.100.127:8080"
+const baseURL = "http://192.168.100.250:8080"
 
 export const getAllMovies = (setMovies) => {
     return fetch(baseURL + "/movies")
@@ -32,9 +32,13 @@ export const getAllMovies = (setMovies) => {
     // const user2 = JSON.stringify(platformListB)
     const userObject = {user1: platformListA, user2: platformListB}
     const jsonObject = JSON.stringify(userObject)
-    console.log(jsonObject)
     
-        return fetch(baseURL +"/movies/search", {method: "POST",body: jsonObject})
+        return fetch(baseURL +"/movies/search", {method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: jsonObject})
         .then(res => res.json())
         .then((moviesData) => setMovies(moviesData))
         .catch((err) => console.error(err))

@@ -32,8 +32,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const MovieListScreen = ({ route }) => {
-  const [movies1, setMovies1] = useState([]);
-  const [movies2, setMovies2] = useState([]);
+  const [movies, setMovies] = useState([]);
+  
   const navigation = useNavigation();
   const { region1id,region2id,provider1ids,provider2ids } = route.params;
   const [moviesFound, setMoviesFound] = useState([]);
@@ -46,22 +46,22 @@ const MovieListScreen = ({ route }) => {
   });
 
   useEffect(() => {
-    getMoviesRegion(setMovies1, region1id,region2id,provider1ids,provider2ids );
+    getMoviesRegion(setMovies, region1id,region2id,provider1ids,provider2ids );
     
   }, []);
-  console.log(route.params)
 
-  useEffect(() => {
-    if (movies1.length > 0 && movies2.length > 0) {
-      const movie1Ids = movies1.map((movie) => {
-        return movie.id;
-      });
-      const moviesToFind = movies2.filter((movie) =>
-        movie1Ids.includes(movie.id)
-      );
-      setMoviesFound(moviesToFind);
-    }
-  }, [movies2, movies1]);
+  // useEffect(() => {
+  //   if (movies1.length > 0 && movies2.length > 0) {
+  //     const movie1Ids = movies1.map((movie) => {
+  //       return movie.id;
+  //     });
+  //     const moviesToFind = movies2.filter((movie) =>
+  //       movie1Ids.includes(movie.id)
+  //     );
+  //     setMoviesFound(moviesToFind);
+  //   }
+  // }, [movies2, movies1]);
+  console.log("movie",movies)
 
   return (
     <View className="bg-[#19232E] font-bold flex-1">
@@ -77,7 +77,7 @@ const MovieListScreen = ({ route }) => {
         <View className="pl-4">
           <FlatList
             contentContainerStyle={{ paddingBottom: 200 }}
-            data={moviesFound}
+            data={movies}
             renderItem={(itemData) => {
               return (
                 <View className="flex-row rounded-xl items-center mb-4 mr-3 bg-[#313d4a]">
