@@ -5,10 +5,10 @@ A 2 week project helping friends in different countries find movies they are bot
 
 
 ## Creators:
-- __pmo234__ (Peter Morrison)
-- __Effrancina__ (Effie Menichetti)
-- __Cordu7__ (Cordu Gunst)
-- __RomainLando__ (Romain Landolfini)
+- [__pmo234__ (Peter Morrison)](https://github.com/pmo234)
+- [__Effrancina__ (Effie Menichetti)](https://github.com/Effrancina)
+- [__Cordu7__ (Cordu Gunst)](https://github.com/Cordu7)
+- [__RomainLando__ (Romain Landolfini)](https://github.com/RomainLando)
 
 
 ## Brief:
