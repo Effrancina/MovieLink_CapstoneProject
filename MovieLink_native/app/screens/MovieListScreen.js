@@ -61,7 +61,6 @@ const MovieListScreen = ({ route }) => {
   //     setMoviesFound(moviesToFind);
   //   }
   // }, [movies2, movies1]);
-  console.log("movie",movies)
 
   return (
     <View className="bg-[#19232E] font-bold flex-1">

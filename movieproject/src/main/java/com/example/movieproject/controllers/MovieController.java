@@ -137,20 +137,18 @@ public class MovieController {
             for (Movie movie:user1List) {
                 System.out.println(movie.getTitle());
             }
-            System.out.println("break");
             for (Movie movie:user2List) {
                 System.out.println(movie.getTitle());
             }
 
             List<Movie> finalList = user2List.stream()
                     .filter(user1List::contains)
+                    .distinct()
                     .collect(Collectors.<Movie>toList());
 
             return new ResponseEntity<>(finalList, HttpStatus.OK);
         }
     }
-
-
 }
 
 
