@@ -60,16 +60,7 @@ function makeMovieObject() {
   setFilteredMovies(newMovieObject);
 }
 
-// const searchFilterFunction = (text) => {
-//   if (text){
-//     const newMovies = justMovieTitle.filter(movie =>{
-//       console.log(movie)
-//       return movie.title
-//     })
-//   } else{
-//     setFilteredMovies(justMovieTitle);
-//   }
-// }
+
 const searchFilterFunction = (text) => {
 
   if (text) {
@@ -101,7 +92,7 @@ const getItem = (item) => {
   alert(' Title : ' + item.title);
 };
 
-
+// console.log(filteredMovies)
 return (
 <View className="flex-1 bg-black">
   <View className="mt-8 flex-1">
@@ -133,7 +124,7 @@ return (
               }}
               
             />
-          {/* </View> */}
+          
   <Footer></Footer>
   </View>
 </View>

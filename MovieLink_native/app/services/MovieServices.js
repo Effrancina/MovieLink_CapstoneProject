@@ -9,27 +9,17 @@ export const getAllMovies = (setMovies) => {
         .catch((err) => console.error(err))
     }
 
-// export const getAllMoviesForFilter = (setMovies, setMovies2) => {
-//     return fetch(baseURL + "/movies")
-//         .then (res => res.json())
-//         .then((moviesData) => { 
-//             setMovies(moviesData);
-//             setMovies2(moviesData)
-//         })
-//         .catch((err) => console.error(err))
-//         }
-
  export const getMoviesRegion=(setMovies,region1id,region2id,provider1ids,provider2ids) => {
     const platformListA = provider1ids.map(id => {
         return {"region":  region1id+ id-1}
     
     })
-    // const user1 = JSON.stringify(platformListA)
+    
     const platformListB = provider2ids.map(id => {
         return {"region":  region2id+ id-1}
     
     })
-    // const user2 = JSON.stringify(platformListB)
+   
     const userObject = {user1: platformListA, user2: platformListB}
     const jsonObject = JSON.stringify(userObject)
     
