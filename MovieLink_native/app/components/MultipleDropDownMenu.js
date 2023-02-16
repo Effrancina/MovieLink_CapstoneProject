@@ -7,17 +7,17 @@ const MultipleDropDownMenu = (props) => {
   return (
     <View className="p-3">
         <MultipleSelectList
-            boxStyles={{ backgroundColor: "#B9AEE0" }}
+            boxStyles={{ backgroundColor: "#B9AEE0", maxWidth:200}}
             dropdownTextStyles={{ color: "black", fontWeight: "bold", fontSize: 16 }}
             dropdownItemStyles={{ backgroundColor: "#B9AEE0" }}
-            dropdownStyles={{backgroundColor: "#B9AEE0" }}
+            dropdownStyles={{backgroundColor: "#B9AEE0" , maxWidth:200}}
             inputStyles={{ fontWeight: "bold" }}
-            placeholder="Select Region"
+            placeholder="Select Provider"
             setSelected={(val) => props.setSelected(val)}
             data={props.justData}
-            // onSelect={()=>alert(props.selected)}
-            label="providers"
+            label="Providers"
             save="key"
+            badgeStyles={{backgroundColor: "#313d4a"}}
           />
         </View>
   )

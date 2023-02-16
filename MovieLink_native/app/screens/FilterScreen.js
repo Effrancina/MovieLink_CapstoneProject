@@ -14,6 +14,9 @@ import Footer from "../components/Footer";
 import DropDownMenu from "../components/DropDownMenu";
 import { getAllRegions, getRegionById } from "../services/RegionServices";
 import MultipleDropDownMenu from "../components/MultipleDropDownMenu";
+import Netflix from "../components/Netflix";
+import AmazonPrime from "../components/AmazonPrime";
+import DisneyPlus from "../components/DisneyPlus";
 
 const FilterScreen = (props) => {
   const navigation = useNavigation();
@@ -33,10 +36,7 @@ const FilterScreen = (props) => {
     const platformListA = selected.map(id => {
         return {"region":  id+ id1-1}
     })
-    // const user1 = JSON.stringify(platformListA)
-    // console.log("user1", user1)
-    // const user1 = Object.fromEntries(platformListA)
-    // setUsers([...users,user1])
+    
     setPlatformList1(platformListA)
     const platformListB = selected2.map(id => id+ id2-1)
     setPlatformList2(platformListB)
@@ -82,23 +82,21 @@ const FilterScreen = (props) => {
     setJustPlatforms(platformsToShow);
   };
 
-  
-
-//   console.log( selected);
-//   console.log( platformList1);
-//   console.log( platformList2);
-//   console.log("Selected2: " +selected2);
-//   console.log("id1: " +id1);
-//   console.log("id2: " +id2)
 
   return (
     <View className="flex-1 bg-black">
       <ScrollView className="mt-8">
         <View className="flex-1 items-center">
           <Header></Header>
-          <Text className="text-white font-bold text-xl mb-10">
-            Choose your Providers Below
-          </Text>
+
+          {/* <View className="flex-row  items-center mt-5">
+
+          <Netflix></Netflix>
+          <AmazonPrime></AmazonPrime>
+          <DisneyPlus></DisneyPlus>
+         
+          </View > */}
+
           <Text className="text-white font-bold text-lg my-5">
             Choose your Providers for {region1.regionName}
           </Text>
@@ -106,17 +104,6 @@ const FilterScreen = (props) => {
             justData={justPlatforms}
             setSelected={setSelected}
           ></MultipleDropDownMenu>
-          <TouchableOpacity
-            onPress={() => Linking.openURL("http://www.netflix.com/gb/")}
-          >
-            <Image
-              source={{
-                uri: "https://about.netflix.com/images/meta/netflix-symbol-black.png",
-              }}
-              className="h-10 w-10"
-              accessibilityLabel="movie poster"
-            ></Image>
-          </TouchableOpacity>
           <Text className="text-white font-bold text-lg my-5">
             Choose your Providers for {region2.regionName}
           </Text>
@@ -128,19 +115,19 @@ const FilterScreen = (props) => {
             className="rounded-lg bg-[#62DFB7] p-3 w-60 mt-10 "
             onPress={() =>
  
-              navigation.navigate("Movie List", { region1id:id1,region2id:id2,provider1ids:selected,provider2ids:selected2 })
+                navigation.navigate("Movie List", { region1id:id1,region2id:id2,provider1ids:selected,provider2ids:selected2 })
             }
-          >
+            >
             <Text className="text-center text-black text-lg font-bold">
-              See Movies!
+                See Movies!
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className="rounded-lg bg-[#62DFB7] p-3 w-60 mt-10 "
+            className="rounded-lg bg-[#62DFB7] p-3 w-60 mt-10 mb-7 "
             onPress={() =>
-              navigation.navigate("Random Movie Screen", { id1: id1, id2: id2 })
+                navigation.navigate("Random Movie Screen", { id1: id1, id2: id2 })
             }
-          >
+            >
             <Text className="text-center text-black text-lg font-bold">
               Lucky Dip!
             </Text>

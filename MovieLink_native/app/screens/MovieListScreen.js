@@ -12,7 +12,6 @@ import {
   Image,
 } from "react-native";
 
-// import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
@@ -50,22 +49,37 @@ const MovieListScreen = ({ route }) => {
     
   }, []);
 
-  // useEffect(() => {
-  //   if (movies1.length > 0 && movies2.length > 0) {
-  //     const movie1Ids = movies1.map((movie) => {
-  //       return movie.id;
-  //     });
-  //     const moviesToFind = movies2.filter((movie) =>
-  //       movie1Ids.includes(movie.id)
-  //     );
-  //     setMoviesFound(moviesToFind);
-  //   }
-  // }, [movies2, movies1]);
+  useEffect(() => {
+    IMDBOrder()
+    
+  }, [movies]);
+
+  
+
+  const makeAlphabetical = function (){
+    const inOrder = movies.sort(function (a,b){
+        let textA = a.title.toUpperCase();
+        let textB = b.title.toUpperCase();
+        return(textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+
+    })
+    setMovies(inOrder)
+}
+  const IMDBOrder = function (){
+    const inOrder = movies.sort(function (a,b){
+        let textA = a.score;
+        let textB = b.score;
+        return(textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+
+    })
+    setMovies(inOrder)
+}
 
   return (
     <View className="bg-[#19232E] font-bold flex-1">
       <View className="mt-12 flex-1">
         <Header></Header>
+        
 
         <StatusBar style="auto" />
 
@@ -104,7 +118,10 @@ const MovieListScreen = ({ route }) => {
                       </Text>
                     </View>
                     <Text className="text-white font-bold text-center">
-                      Platform: {itemData.item.regions[0].platform}
+                      Platforms: {itemData.item.regions[0].platform}
+                    </Text>
+                    <Text className="text-white font-bold text-center">
+                      IMDB Score: {itemData.item.score}
                     </Text>
                   </View>
                 </View>
@@ -118,19 +135,5 @@ const MovieListScreen = ({ route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  // container: {
-  // flex: 1,
-  // backgroundColor: '#fff',
-  // alignItems: 'center',
-  // justifyContent: 'center',
-  // },
-
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});
 
 export default MovieListScreen;
