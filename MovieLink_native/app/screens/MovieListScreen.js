@@ -50,29 +50,31 @@ const MovieListScreen = ({ route }) => {
   }, []);
 
   useEffect(() => {
-    IMDBOrder()
     
-  }, [movies]);
+   IMDBOrder()
+    
+  }, []);
 
   
 
-  const makeAlphabetical = function (){
+  function makeAlphabetical(){
     const inOrder = movies.sort(function (a,b){
-        let textA = a.title.toUpperCase();
-        let textB = b.title.toUpperCase();
-        return(textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-
+      let textA = a.title.toUpperCase();
+      let textB = b.title.toUpperCase();
+      return(textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      
     })
-    setMovies(inOrder)
+    setMovies([...inOrder])
+   
 }
-  const IMDBOrder = function (){
+  function IMDBOrder (){
     const inOrder = movies.sort(function (a,b){
-        let textA = a.score;
-        let textB = b.score;
-        return(textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+        let scoreA = a.score;
+        let scoreB = b.score;
+        return(scoreA < scoreB) ? 1 : (scoreA > scoreB) ? -1 : 0;
 
     })
-    setMovies(inOrder)
+    setMovies([...inOrder])
 }
 
   return (
@@ -83,10 +85,27 @@ const MovieListScreen = ({ route }) => {
 
         <StatusBar style="auto" />
 
-        <Text className="text-lg my-5 text-white font-bold text-center">
+        <Text className="text-lg my-1 text-white font-bold text-center">
           We found these Movies for you!
         </Text>
-
+        <View className="flex-row justify-center items-center mb-4">
+        <TouchableOpacity
+            className="rounded-lg bg-[#62DFB7] p-3 w-30 mt-1 mx-4"
+            onPress={makeAlphabetical}
+            >
+            <Text className="text-center text-black text-lg font-bold">
+                Alphabetical
+            </Text>
+          </TouchableOpacity>
+        <TouchableOpacity
+            className="rounded-lg bg-[#62DFB7] p-3 w-30 mt-1 mx-4"
+            onPress={IMDBOrder}
+            >
+            <Text className="text-center text-black text-lg font-bold">
+                IMDB Score
+            </Text>
+          </TouchableOpacity>
+        </View>
         <View className="pl-4">
           <FlatList
             contentContainerStyle={{ paddingBottom: 200 }}

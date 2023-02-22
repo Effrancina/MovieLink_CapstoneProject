@@ -1,24 +1,20 @@
-
 import React, { useLayoutEffect } from "react";
 import {
-Pressable,
-StyleSheet,
 Text,
 View,
-ScrollView,
-TouchableOpacity,
-Image,
-SearchIcon,
-TextInput,
-FlatList
+FlatList,
+ScrollView
 } from "react-native";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { AdjustmentsHorizontalIcon } from "react-native-heroicons/outline";
+
 import {getAllMovies} from "../services/MovieServices";
 import {SearchBar} from "react-native-elements"
+import Netflix from "../components/Netflix";
+import AmazonPrime from "../components/AmazonPrime";
+import DisneyPlus from "../components/DisneyPlus";
 
 
 
@@ -26,7 +22,8 @@ const SearchMovieScreen = () => {
   const [search, setSearch] = useState('');
   const [justMovieTitle, setJustMovieTitle] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState("");
+  const [regions1, setRegions1] = useState([]);
 
 
   const navigation = useNavigation();
@@ -44,9 +41,11 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  makeMovieObject()
+  if(movies){makeRegions()}
 
 }, [movies]);
+
+
 
 
 function makeMovieObject() {
@@ -87,15 +86,53 @@ const ItemView = ({ item }) => {
     </Text>
   );
 };
-const getItem = (item) => {
-  // Function for click on an item
-  alert(' Title : ' + item.title);
-};
 
-// console.log(filteredMovies)
+
+
+const makeRegions = () => {
+
+  console.log("hello",movies[0])
+  
+
+
+  const newRegions = movies.slice(0, 50).map(movie => {
+    console.log(movie.regions)
+    return movie.regions.map(regionA =>{
+      return(
+    <View className="items-center">
+      <View className="flex-row items-center my-1">
+
+      <Text className="text-white mx-2">
+       Title: {movie.title} 
+      </Text>
+      <Text className="text-white mx-2">
+       Region: {regionA.regionName}
+      </Text>
+      {regionA.platform==="Netflix" &&
+        <Netflix></Netflix>
+        }
+        {regionA.platform==="Amazon Prime" &&
+        <AmazonPrime></AmazonPrime>
+        }
+        {regionA.platform==="Disney Plus" &&
+        <DisneyPlus></DisneyPlus>
+        }
+      </View>
+    </View>
+      )
+  })})
+  // console.log(newRegions);
+  setRegions1(newRegions);
+    }
+
+
+
+
+
+
 return (
 <View className="flex-1 bg-black">
-  <View className="mt-8 flex-1">
+  <View className="mt-8 flex-1 ">
       <Header></Header>
       {/* <View className="flex-row items-center space-x-2 pb-2 mx-4"> */}
           {/* <View className="flex-2 space-x-2 bg-purple p-3 justify-around pb-20"> */}
@@ -111,7 +148,8 @@ return (
               placeholder="Type Here..."
               value={search}
             />
-            <FlatList
+
+            {/* <FlatList
               className=" bg-black text-white my-3"
               data={filteredMovies}
               keyExtractor={(item, index) => index.toString()}
@@ -123,7 +161,17 @@ return (
                 </View>
               }}
               
-            />
+            /> */}
+            <ScrollView>
+            <Text className = "text-white">
+               Cheeky Hello
+               
+            </Text>
+            {regions1}
+            
+
+            </ScrollView>
+
           
   <Footer></Footer>
   </View>

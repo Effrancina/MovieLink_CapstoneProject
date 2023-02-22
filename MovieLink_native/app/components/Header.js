@@ -1,14 +1,14 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Icon from './Icon';
 
 const Header = () => {
   return (
-    <View className="flex-row justify-center mr-5">
+    <View className="justify-center items-center">
 
-                    <View className="flex-row justify-center">
+                    <View className="justify-center">
 
-                        <MaterialCommunityIcons name="movie-roll" size={90} color="white" />
+                        <Icon></Icon>
                     </View>
                     <Text className="font-bold text-4xl mt-7 text-white " >
                         MovieLink

@@ -1,18 +1,14 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
-  Pressable,
   StyleSheet,
   Text,
   View,
-  FlatList,
   ScrollView,
-  Button,
   TouchableOpacity,
   Image,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-// import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { getAllRegions } from "../services/RegionServices";

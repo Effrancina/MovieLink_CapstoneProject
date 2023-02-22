@@ -55,7 +55,7 @@ const RandomMovieScreen = ({ route }) => {
 useEffect(() => {
       
 
-  console.log(movie.regions );
+  
   if(movie){makeRegions()}
 
   }, [movie]);
@@ -84,7 +84,7 @@ useEffect(() => {
       </View>
       )
     });
-    console.log(newRegions);
+    
     setRegion(newRegions);
   }
 

@@ -89,14 +89,6 @@ const FilterScreen = (props) => {
         <View className="flex-1 items-center">
           <Header></Header>
 
-          {/* <View className="flex-row  items-center mt-5">
-
-          <Netflix></Netflix>
-          <AmazonPrime></AmazonPrime>
-          <DisneyPlus></DisneyPlus>
-         
-          </View > */}
-
           <Text className="text-white font-bold text-lg my-5">
             Choose your Providers for {region1.regionName}
           </Text>
