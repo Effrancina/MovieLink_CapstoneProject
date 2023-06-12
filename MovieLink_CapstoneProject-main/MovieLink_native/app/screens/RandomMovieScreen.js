@@ -61,32 +61,30 @@ useEffect(() => {
   }, [movie]);
 
   const makeRegions = () => {
-    let regions = movie.regions;
-    // console.log("regions",regions);
-    const newRegions = regions.map(element => {
-      return(
-      <View className="items-center">
-        <View className="flex-row items-center my-1">
-
-        <Text className="text-white mx-2">
-         Region: {element.regionName} 
-        </Text>
-        {element.platform==="Netflix" &&
-        <Netflix></Netflix>
-        }
-        {element.platform==="Amazon Prime" &&
-        <AmazonPrime></AmazonPrime>
-        }
-        {element.platform==="Disney Plus" &&
-        <DisneyPlus></DisneyPlus>
-        }
-        </View>
-      </View>
-      )
-    });
-    console.log(newRegions);
-    setRegion(newRegions);
-  }
+    if (movie && movie.regions) {
+      const uniqueRegions = Array.from(new Set(movie.regions.map((element) => element.regionName)));
+  
+      const newRegions = uniqueRegions.map((regionName) => {
+        const platforms = movie.regions
+          .filter((element) => element.regionName === regionName)
+          .map((element) => element.platform);
+  
+        return (
+          <View key={regionName} className="items-center">
+            <View className="flex-row items-center my-1">
+              <Text className="text-white mx-2">Region: {regionName}</Text>
+              {platforms.includes("Netflix") && <Netflix></Netflix>}
+              {platforms.includes("Amazon Prime") && <AmazonPrime></AmazonPrime>}
+              {platforms.includes("Disney Plus") && <DisneyPlus></DisneyPlus>}
+            </View>
+          </View>
+        );
+      });
+  
+      setRegion(newRegions);
+    }
+  };
+  
 
 	
   return (

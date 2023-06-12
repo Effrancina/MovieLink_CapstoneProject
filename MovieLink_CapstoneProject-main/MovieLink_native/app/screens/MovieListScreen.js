@@ -32,13 +32,11 @@ import Footer from "../components/Footer";
 
 const MovieListScreen = ({ route }) => {
   const [movies, setMovies] = useState([]);
-  
+
   const navigation = useNavigation();
-  const { region1id,region2id,provider1ids,provider2ids } = route.params;
+  const { region1id, region2id, provider1ids, provider2ids } = route.params;
   const [moviesFound, setMoviesFound] = useState([]);
   const [isDescendingOrder, setIsDescendingOrder] = useState(true);
-
-
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -47,73 +45,90 @@ const MovieListScreen = ({ route }) => {
   });
 
   useEffect(() => {
-    getMoviesRegion(setMovies, region1id,region2id,provider1ids,provider2ids );
-    
+    getMoviesRegion(
+      setMovies,
+      region1id,
+      region2id,
+      provider1ids,
+      provider2ids
+    );
   }, []);
 
   useEffect(() => {
-    IMDBOrder()
-    
+    IMDBOrder();
+    // movies?console.log(posterName(movies[0].title)):null;
+    if (movies && movies.length > 0) {
+      console.log(removePosterProfile(movies));
+    }
   }, [movies]);
+
+  const makeAlphabetical = function () {
+    const inOrder = movies.sort(function (a, b) {
+      let textA = a.title.toUpperCase();
+      let textB = b.title.toUpperCase();
+      return textA < textB ? -1 : textA > textB ? 1 : 0;
+    });
+    setMovies(inOrder);
+  };
+  
+  const IMDBOrder = function () {
+    const inOrder = movies.sort(function (a, b) {
+      let textA = a.score;
+      let textB = b.score;
+      return textA < textB ? 1 : textA > textB ? -1 : 0;
+    });
+    setMovies(inOrder);
+  };
+
+  function posterName(movie) {
+    if (movie.includes(" ")) {
+      return movie.toLowerCase().split(" ").join("-");
+    } else {
+      return movie.toLowerCase();
+    }
+  }
 
   
 
-  const makeAlphabetical = function (){
-    const inOrder = movies.sort(function (a,b){
-        let textA = a.title.toUpperCase();
-        let textB = b.title.toUpperCase();
-        return(textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-
-    })
-    setMovies(inOrder)
-}
-  const IMDBOrder = function (){
-    const inOrder = movies.sort(function (a,b){
-        let textA = a.score;
-        let textB = b.score;
-        return(textA < textB) ? 1 : (textA > textB) ? -1 : 0;
-
-    })
-    setMovies(inOrder)
-}
+  function removePosterProfile(poster){
+    if (poster.includes("{profile}")) {
+      return poster.replace("{profile}", "");
+    }else{
+      return poster;
+    }
+  }
 
   return (
     <View className="bg-[#19232E] font-bold flex-1">
       <View className="mt-12 flex-1">
         <Header></Header>
-        
 
         <StatusBar style="auto" />
-        
+
         <Text className="text-lg my-5 text-white font-bold text-center">
           We found these Movies for you!
         </Text>
 
         <View className="flex-row items-center justify-center">
-
-        <TouchableOpacity
-            className="rounded-lg bg-[#62DFB7] p-3 w-40 mt-5 mx-2 mb-5"
-          
-            
-          >
-            <Text className="text-center text-black text-lg font-bold"
-             onPress={() => {
-              setIsDescendingOrder(!isDescendingOrder);
-              IMDBOrder();
-            }}>
+          <TouchableOpacity className="rounded-lg bg-[#62DFB7] p-3 w-40 mt-5 mx-2 mb-5">
+            <Text
+              className="text-center text-black text-lg font-bold"
+              onPress={() => {
+                setIsDescendingOrder(!isDescendingOrder);
+                IMDBOrder();
+              }}
+            >
               IMDB Score
             </Text>
           </TouchableOpacity>
-        <TouchableOpacity
-            className="rounded-lg bg-[#62DFB7] p-3 w-40 mt-5 mx-2 mb-5"
-          
-            
-          >
-            <Text className="text-center text-black text-lg font-bold"
-            onPress={() => {
-              setIsDescendingOrder(!isDescendingOrder);
-              makeAlphabetical();
-            }}>
+          <TouchableOpacity className="rounded-lg bg-[#62DFB7] p-3 w-40 mt-5 mx-2 mb-5">
+            <Text
+              className="text-center text-black text-lg font-bold"
+              onPress={() => {
+                setIsDescendingOrder(!isDescendingOrder);
+                makeAlphabetical();
+              }}
+            >
               Alphabetical
             </Text>
           </TouchableOpacity>
@@ -127,11 +142,12 @@ const MovieListScreen = ({ route }) => {
               return (
                 <View className="flex-row rounded-xl items-center mb-4 mr-3 bg-[#313d4a]">
                   <View className="pr-5 ">
+                    
                     <Image
                       source={{
-                        uri: "https://images.justwatch.com/poster/8731868/s592/the-lord-of-the-rings-the-fellowship-of-the-ring.webp",
+                        uri: "https://images.justwatch.com"+removePosterProfile(itemData.item.poster)+ "s592/" + posterName(itemData.item.title) + ".webp",
                       }}
-                      className="h-48 w-28"
+                      className="h-52 w-36"
                       accessibilityLabel="movie poster"
                     ></Image>
                   </View>
