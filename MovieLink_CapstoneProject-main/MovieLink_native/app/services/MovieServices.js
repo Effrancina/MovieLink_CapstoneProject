@@ -41,6 +41,13 @@ export const getAllMovies = (setMovies) => {
         .catch((err) => console.error(err))
     }
 
+export const getMovieById = (setMovie,id) => {
+    return fetch(baseURL + "/movies/"+id)
+        .then (res => res.json())
+        .then((moviesData) => setMovie(moviesData))
+         .catch((err) => console.error(err));
+}
+
 
         
 

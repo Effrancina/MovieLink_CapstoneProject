@@ -27,6 +27,7 @@
     "react-native-screens": "^3.20.0",
     "react-native-svg": "13.4.0",
     "react-native-web": "~0.18.9",
+    "react-window": "^1.8.9",
     "tailwindcss-react-native": "^1.7.10"
   },
   "devDependencies": {

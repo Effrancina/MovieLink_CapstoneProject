@@ -17,6 +17,7 @@ import SearchMovieScreen from "./app/screens/SearchMovieScreen";
 import InformationScreen from "./app/screens/InformationScreen";
 import FilterScreen from "./app/screens/FilterScreen";
 import RandomMovieScreen from "./app/screens/RandomMovieScreen";
+import SingleMovieScreen from "./app/screens/SingleMovieScreen";
 
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
           <Stack.Screen name="Filter Screen" component={FilterScreen} />
           <Stack.Screen name="Search Movie Screen" component={SearchMovieScreen} />
           <Stack.Screen name="Information Screen" component={InformationScreen} />
+          <Stack.Screen name= "Single Movie Screen" component={SingleMovieScreen} />
         </Stack.Navigator>
       </TailwindProvider>
     </NavigationContainer>

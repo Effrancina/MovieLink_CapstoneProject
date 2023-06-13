@@ -17,17 +17,17 @@ import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { posterName,removePosterProfile,makeRegions } from "../components/Useful";
 import {
-  getRandomMovie,
+  getMovieById,
 } from "../services/MovieServices";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 
-const RandomMovieScreen = ({ route }) => {
+const SingleMovieScreen = ({ route }) => {
   const [movie, setMovie] = useState("");
   const [region, setRegion] = useState([]);
   const navigation = useNavigation();
-  const { id1, id2 } = route.params;
+  const { id } = route.params;
  
 
   useLayoutEffect(() => {
@@ -37,7 +37,7 @@ const RandomMovieScreen = ({ route }) => {
   });
 
   useEffect(() => {
-    getRandomMovie(setMovie);
+    getMovieById(setMovie,id);
 
 }, []);
 
@@ -56,8 +56,8 @@ useEffect(() => {
 
         <StatusBar style="auto" />
 
-        <Text className="text-lg my-5 text-white font-bold text-center">
-          Here's a random movie for you to enjoy!
+        <Text className="text-lg my-1 text-white font-bold text-center">
+          
         </Text>
 
         <View className="pb-100  items-center">
@@ -69,18 +69,11 @@ useEffect(() => {
             className="h-80 w-56"
             accessibilityLabel="movie poster"
           ></Image>
-          <Text className = "text-white mt-2 text-lg"> IMDB Score {movie.score}</Text>
-          <View >
+          <Text className = "text-white mt-2 mx-10 text-lg"> IMDB Score: {movie.score}</Text>
+          <View className="my-5">
             {region}
           </View>
-          <TouchableOpacity
-            className="rounded-lg bg-[#62DFB7] p-3 w-60 mt-10 mb-4 "
-            onPress={() => getRandomMovie(setMovie)}
-          >
-            <Text className="text-center text-black text-lg font-bold">
-              Lucky Dip!
-            </Text>
-          </TouchableOpacity>
+          
         </View>
       </ScrollView>
       <Footer></Footer>
@@ -88,4 +81,4 @@ useEffect(() => {
   );
 };
 
-export default RandomMovieScreen;
+export default SingleMovieScreen;

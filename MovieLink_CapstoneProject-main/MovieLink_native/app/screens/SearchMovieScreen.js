@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useMemo, PureComponent } from "react";
 import {
   Pressable,
   StyleSheet,
@@ -9,7 +9,7 @@ import {
   Image,
   SearchIcon,
   TextInput,
-  FlatList
+  FlatList,
 } from "react-native";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -18,14 +18,72 @@ import Footer from "../components/Footer";
 import { AdjustmentsHorizontalIcon } from "react-native-heroicons/outline";
 import { getAllMovies } from "../services/MovieServices";
 import { SearchBar } from "react-native-elements";
+import {
+  posterName,
+  removePosterProfile,
+  makeRegions,
+} from "../components/Useful";
+
+
+
+
+class MovieItem extends PureComponent {
+  render() {
+    
+    const { movie, region,navigation } = this.props;
+    return (
+      <TouchableOpacity className="flex-row bg-[#313d4a] mx-3 my-1 rounded-lg"
+      onPress={() =>
+        navigation.navigate("Single Movie Screen", { id: movie.id })
+      }>
+        <Image
+          source={{
+            uri:
+              "https://images.justwatch.com" +
+              removePosterProfile(movie.poster) +
+              "s592/" +
+              posterName(movie.title) +
+              ".webp",
+          }}
+          className="h-52 w-36"
+          accessibilityLabel="movie poster"
+          ></Image>
+        <View className=" mt-12 mb-7 flex-1 mr-2">
+          <View>
+            <Text
+              style={{
+                flex: 1,
+                fontSize: 20,
+                color: "white",
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+              >
+              {movie.title}
+            </Text>
+
+            <Text className="text-white mt-2 text-lg text-center">
+              IMDB Score: {movie.score}
+            </Text>
+            
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+}
 
 const SearchMovieScreen = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [justMovieTitle, setJustMovieTitle] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [loadingDots, setLoadingDots] = useState('');
+  const [loadingDots, setLoadingDots] = useState("");
+ 
+  const [region, setRegion] = useState([]);
+  const [currentItemId, setCurrentItemId] = useState(null);
+  const [movieRegions, setMovieRegions] = useState({});
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
@@ -41,6 +99,12 @@ const SearchMovieScreen = () => {
   useEffect(() => {
     makeMovieObject();
   }, [movies]);
+
+  useEffect(() => {
+    if (currentItemId && movies.length > 0) {
+      makeRegions(movies[currentItemId - 1], setRegion, region);
+    }
+  }, [movies, currentItemId]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,7 +125,7 @@ const SearchMovieScreen = () => {
     });
     setJustMovieTitle(newMovieObject);
     setFilteredMovies(newMovieObject);
-    
+
     if (movies.length > 0) {
       setIsLoading(false);
     }
@@ -69,10 +133,8 @@ const SearchMovieScreen = () => {
 
   const searchFilterFunction = (text) => {
     if (text) {
-      const newData = justMovieTitle.filter(function(item) {
-        const itemData = item.title
-          ? item.title.toUpperCase()
-          : ''.toUpperCase();
+      const newData = justMovieTitle.filter(function (item) {
+        const itemData = item.title ? item.title.toUpperCase() : "".toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
@@ -84,30 +146,15 @@ const SearchMovieScreen = () => {
     }
   };
 
-  const ItemView = ({ item }) => {
-    return (
-      // Flat List Item
-      <Text onPress={() => getItem(item)}>
-        {item.title.toUpperCase()}
-      </Text>
-    );
-  };
-
-  const getItem = (item) => {
-    // Function for click on an item
-    alert('Title: ' + item.title);
-  };
-
   const updateLoadingDots = () => {
     setLoadingDots((prevDots) => {
-      if (prevDots === '...') {
-        return '';
+      if (prevDots === "...") {
+        return ".";
       } else {
-        return prevDots + '.';
+        return prevDots + ".";
       }
     });
   };
-
   
 
   return (
@@ -126,41 +173,45 @@ const SearchMovieScreen = () => {
           inputStyle={{ fontWeight: "bold", color: "black" }}
           placeholderTextColor="black"
           onChangeText={(text) => searchFilterFunction(text)}
-          onClear={(text) => searchFilterFunction('')}
+          onClear={(text) => searchFilterFunction("")}
           placeholder="Type Here..."
           value={search}
         />
 
         {isLoading ? (
           <View className="justify-center mt-20 mx-16">
-          <Image
-            source={{uri:"https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/Hero.png?w=769"}}
-            className="h-44 w-72 rounded-md "
-            accessibilityLabel="Movie poster">
-          </Image>
-          <Text className="text-white text-xl my-2 mx-4">
-                    Loading{loadingDots}
-                  </Text>
-        </View>
+            <Image
+              source={{
+                uri: "https://counseling.northwestern.edu/wp-content/uploads/sites/83/2021/02/Hero.png?w=769",
+              }}
+              className="h-44 w-72 rounded-md "
+              accessibilityLabel="Movie poster"
+            ></Image>
+            <Text className="text-white text-xl my-2 mx-4">
+              Loading{loadingDots}
+            </Text>
+          </View>
         ) : (
+          
           <FlatList
             className="bg-black text-white my-3"
             data={filteredMovies}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={(ItemView) => {
+            renderItem={({ item }) => {
+              setCurrentItemId(item.id);
               return (
-                <View className="bg-[#313d4a] mx-3 my-1 rounded-lg">
-                  <Text className="text-white text-xl my-2 mx-4">
-                    {ItemView.item.title}
-                  </Text>
-                </View>
+                <MovieItem
+                  movie={movies[item.id - 1]}
+                  region={region[item.id - 1]}
+                  navigation={navigation}
+                />
               );
             }}
           />
+        
         )}
-
       </View>
-        <Footer></Footer>
+      <Footer></Footer>
     </View>
   );
 };

@@ -10,7 +10,7 @@ const Netflix = () => {
     >
     <Image
       source={{
-          uri: "https://about.netflix.com/images/meta/netflix-symbol-black.png",
+          uri: "https://static.vecteezy.com/system/resources/previews/017/396/804/original/netflix-mobile-application-logo-free-png.png",
         }}
         className="h-16 w-16"
         accessibilityLabel="netflix logo"

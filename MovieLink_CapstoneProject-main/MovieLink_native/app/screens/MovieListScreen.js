@@ -11,10 +11,10 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-
+// import { posterName,removePosterProfile } from "../components/Useful.js";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-
+import { posterName,removePosterProfile,makeRegions } from "../components/Useful";
 import { SelectList } from "react-native-dropdown-select-list";
 import {
   UserIcon,
@@ -32,7 +32,7 @@ import Footer from "../components/Footer";
 
 const MovieListScreen = ({ route }) => {
   const [movies, setMovies] = useState([]);
-
+  const [region, setRegion] = useState([]);
   const navigation = useNavigation();
   const { region1id, region2id, provider1ids, provider2ids } = route.params;
   const [moviesFound, setMoviesFound] = useState([]);
@@ -56,10 +56,8 @@ const MovieListScreen = ({ route }) => {
 
   useEffect(() => {
     IMDBOrder();
-    // movies?console.log(posterName(movies[0].title)):null;
-    if (movies && movies.length > 0) {
-      console.log(removePosterProfile(movies));
-    }
+    if(movies){makeRegions(movies,setRegion)}
+    
   }, [movies]);
 
   const makeAlphabetical = function () {
@@ -80,23 +78,7 @@ const MovieListScreen = ({ route }) => {
     setMovies(inOrder);
   };
 
-  function posterName(movie) {
-    if (movie.includes(" ")) {
-      return movie.toLowerCase().split(" ").join("-");
-    } else {
-      return movie.toLowerCase();
-    }
-  }
-
   
-
-  function removePosterProfile(poster){
-    if (poster.includes("{profile}")) {
-      return poster.replace("{profile}", "");
-    }else{
-      return poster;
-    }
-  }
 
   return (
     <View className="bg-[#19232E] font-bold flex-1">
@@ -140,7 +122,10 @@ const MovieListScreen = ({ route }) => {
             data={movies}
             renderItem={(itemData) => {
               return (
-                <View className="flex-row rounded-xl items-center mb-4 mr-3 bg-[#313d4a]">
+                <TouchableOpacity className="flex-row rounded-xl items-center mb-4 mr-3 bg-[#313d4a]"
+                onPress={() =>
+                  navigation.navigate("Single Movie Screen", { id: itemData.item.id })
+                }>
                   <View className="pr-5 ">
                     
                     <Image
@@ -165,14 +150,12 @@ const MovieListScreen = ({ route }) => {
                         {itemData.item.title}
                       </Text>
                     </View>
-                    <Text className="text-white font-bold text-center">
-                      Platforms: {itemData.item.regions[0].platform}
-                    </Text>
+                    
                     <Text className="text-white font-bold text-center">
                       IMDB Score: {itemData.item.score}
                     </Text>
                   </View>
-                </View>
+                </TouchableOpacity>
               );
             }}
             alwaysBounceVertical={false}
